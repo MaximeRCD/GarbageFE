@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ScanPhotoComponent } from './scan-photo/scan-photo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScanPhotoComponent
+    ScanPhotoComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

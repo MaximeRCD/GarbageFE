@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Component } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
@@ -10,8 +10,12 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ScanPhotoComponent {
 
+  headers= new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+    .set('Access-Control-Allow-Origin', '*');
 
-  
+
     private trigger = new Subject();
     public webcamImage!: WebcamImage;
     private nextWebcam = new Subject();
@@ -22,7 +26,7 @@ export class ScanPhotoComponent {
   constructor (private http: HttpClient){}
 
     ngOnInit() {}
-  
+
     /*------------------------------------------
     --------------------------------------------
     triggerSnapshot()
@@ -31,23 +35,24 @@ export class ScanPhotoComponent {
     public triggerSnapshot(): void {
         this.trigger.next(void 0);
     }
-  
+
     /*------------------------------------------
     --------------------------------------------
     handle Image and call saveImg methode
     --------------------------------------------
     --------------------------------------------*/
     public handleImage(webcamImage: WebcamImage): void {
-      
+
         const user_name = "issa"
         let photo_name = user_name+"_"+Date.now()+".jpeg"
 
         this.webcamImage = webcamImage;
         this.captureImage = webcamImage!.imageAsDataUrl;
         //console.info('received webcam image', this.captureImage);
-        this.saveImg(photo_name)
+        this.saveImg(photo_name);
+        //this.getPredictedClass(photo_name)
     }
-  
+
     /*------------------------------------------
     --------------------------------------------
     triggerObservable()
@@ -57,7 +62,7 @@ export class ScanPhotoComponent {
 
         return this.trigger.asObservable();
     }
-  
+
     /*------------------------------------------
     --------------------------------------------
     nextWebcamObservable()
@@ -67,7 +72,7 @@ export class ScanPhotoComponent {
 
         return this.nextWebcam.asObservable();
     }
-    
+
     /*------------------------------------------
     --------------------------------------------
     Save image on file system
@@ -75,25 +80,30 @@ export class ScanPhotoComponent {
     --------------------------------------------*/
 
     public saveImg(photo_name:string): void {
-    
+
      var formdata: any = new FormData();
      formdata.append('img',this.captureImage)
      formdata.append('name',photo_name);
    /*  for (var pair of formdata.entries())
         {
-        console.log(pair[0]+ ', '+ pair[1]); 
+        console.log(pair[0]+ ', '+ pair[1]);
         }
 */
-      // put request api here 
+      // put request api here
       this.http.post('http://localhost:8000/scans/images', formdata).subscribe(
-        (response) => console.log(response),
+        (response) => {
+          console.log(response);
+          this.getPredictedClass(photo_name);
+        },
         (error) => console.log(error)
-        )
+        ),  {headers: this.headers}
     }
 
-    public getPredictedClass()
+    public getPredictedClass(photo_name:string)
     {
-      
+      this.http.get(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( data =>
+        console.log(data)
+      ),  {headers: this.headers}
     }
- 
+
 }

@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import { ScanPhotoComponent } from './scan-photo/scan-photo.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './connection/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
+import {LogInComponent} from "./connection/log-in/log-in.component";
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -20,8 +26,11 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     UserStatisticComponent,
     HomeComponent,
+    LogInComponent,
+    RegisterComponent,
   ],
   imports: [
+    FlexLayoutModule,
     BrowserModule,
     RouterModule.forRoot([
       {path: 'Profile', component: ProfileComponent},
@@ -31,7 +40,10 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     WebcamModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],

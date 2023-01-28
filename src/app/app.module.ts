@@ -9,14 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ScanPhotoComponent,
     ProfileComponent,
-    HomeComponent
+    UserStatisticComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

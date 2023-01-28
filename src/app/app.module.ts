@@ -8,6 +8,7 @@ import { ScanPhotoComponent } from './scan-photo/scan-photo.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([
+      {path: 'Profile', component: ProfileComponent},
+      {path: '', component: ScanPhotoComponent},
+    ]),
     AppRoutingModule,
     WebcamModule,
     HttpClientModule,

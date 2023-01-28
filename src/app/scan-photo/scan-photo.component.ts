@@ -20,8 +20,18 @@ export class ScanPhotoComponent {
     public webcamImage!: WebcamImage;
     private nextWebcam = new Subject();
     captureImage  = '';
+    result : model_result = {
+      image:"string",
+      class: "string",
+      score: 0
+    };
+    ResultPredicted: resutTosave = {
+      user_id : 1,
+      predicted_class : "string",
+      score : 0
+    };
 
-
+    
 
   constructor (private http: HttpClient){}
 
@@ -84,6 +94,7 @@ export class ScanPhotoComponent {
      var formdata: any = new FormData();
      formdata.append('img',this.captureImage)
      formdata.append('name',photo_name);
+
    /*  for (var pair of formdata.entries())
         {
         console.log(pair[0]+ ', '+ pair[1]);
@@ -92,7 +103,7 @@ export class ScanPhotoComponent {
       // put request api here
       this.http.post('http://localhost:8000/scans/images', formdata).subscribe(
         (response) => {
-          console.log(response);
+          //console.log(response);
           this.getPredictedClass(photo_name);
         },
         (error) => console.log(error)
@@ -101,9 +112,41 @@ export class ScanPhotoComponent {
 
     public getPredictedClass(photo_name:string)
     {
-      this.http.get(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( data =>
-        console.log(data)
-      ),  {headers: this.headers}
+     
+      this.http.get<model_result>(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( (data: model_result) => {
+      console.log(data.class); 
+
+      this.result.image = data.image;
+      this.result.score = data.score;
+      this.result.class = data.class;
+
+      this.ResultPredicted.user_id=1;
+      this.ResultPredicted.predicted_class =data.class ;
+      this.ResultPredicted.score = data.score;
+      this.putResultPredicted(this.ResultPredicted);
+    }
+      ),
+       {headers: this.headers}
     }
 
+    public putResultPredicted(data : resutTosave){
+      this.http.put<resutTosave>('http://localhost:8000/stats', data).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => console.log(error)
+        ),  {headers: this.headers}
+    }
+
+}
+export interface model_result{
+  image:string,
+  class: string,
+  score: number
+}
+
+export interface resutTosave{
+  user_id : number
+  predicted_class : string
+  score : number
 }

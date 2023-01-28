@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { WebcamModule } from 'ngx-webcam';
 
@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { UserStatisticComponent } from './user-statistic/user-statistic.component';
+import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './connection/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
@@ -23,15 +24,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppComponent,
     ScanPhotoComponent,
     ProfileComponent,
+    UserStatisticComponent,
+    HomeComponent,
     LogInComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     FlexLayoutModule,
     BrowserModule,
     RouterModule.forRoot([
       {path: 'Profile', component: ProfileComponent},
-      {path: '', component: ScanPhotoComponent},
+      {path: 'Scan Waste', component: ScanPhotoComponent},
+      {path: '', component: HomeComponent},
     ]),
     AppRoutingModule,
     WebcamModule,

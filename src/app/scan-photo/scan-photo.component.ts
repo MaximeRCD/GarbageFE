@@ -15,7 +15,7 @@ export class ScanPhotoComponent {
     .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
     .set('Access-Control-Allow-Origin', '*');
 
-
+    popup:boolean = false;
     private trigger = new Subject();
     public webcamImage!: WebcamImage;
     private nextWebcam = new Subject();

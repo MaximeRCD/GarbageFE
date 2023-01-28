@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserStatistiqueService, Stat, UserTest } from "../user-statistique.service";
-import {Chart} from "chart.js";
+import { Chart } from "chart.js/auto";
 
 @Component({
   selector: 'app-user-statistic',
@@ -11,6 +11,7 @@ export class UserStatisticComponent {
   user!: UserTest;
   statsList: Stat[] = [];
   lineChart!: Chart;
+  barChart!: Chart;
   pieChart!: Chart;
 
 
@@ -21,48 +22,83 @@ export class UserStatisticComponent {
     next: (_statsList: Stat[]) =>{
       _statsList.forEach((sl:Stat) => {
         this.statsList.push(sl);
-        console.log(_statsList);
       })
 
-      // this.lineChart = new Chart("lineChart", {
-      //   type: "line",
-      //   data: {
-      //     labels: _statsList.map(x=>x.beginTime.slice(0,10)),
-      //     datasets: [
-      //       {
-      //         label: 'Number of like per Course',
-      //         data: _statsList.map(x=>x.like),
-      //         pointBackgroundColor : ["#B3F02F"],
-      //         borderColor: "#B3F02F",
-      //         backgroundColor : "#B3F02F",
-      //       },
-      //       {
-      //         label: 'Number of Dislike per Course',
-      //         data: _statsList.map(x=>x.dislike),
-      //         pointBackgroundColor : ["#EF2700"],
-      //         borderColor: "#EF2700",
-      //         backgroundColor : "#EF2700",
-      //       }
-      //     ]
-      //   }
-      // });
-      /*this.pieChart = new Chart("pieChart", {
-        type: "pie",
+      function SetToList(_set: Set<string>): string[]{
+        let arrayFromString: string[] = [];
+        for (let s of _set.values()) {
+          arrayFromString.push(s);
+        }
+        return arrayFromString;
+      }
+
+      this.lineChart = new Chart("lineChart", {
+        type: "line",
         data: {
-          labels: ['Like', 'Dislike',],
+          labels: SetToList(new Set(_statsList.map(x=>x.date.slice(0,10)))),
+          datasets: [
+            {
+              label: 'Number of like per Day',
+              data: SetToList(new Set(_statsList.map(x=>x.date.slice(0,10)))).map(x => _statsList.filter(y => y.date.slice(0,10) === x ).length),
+              pointBackgroundColor : ["#B3F02F"],
+              borderColor: "#B3F02F",
+              backgroundColor : "#B3F02F",
+            }
+          ]
+        }
+      });
+
+      this.barChart = new Chart("barChart", {
+        type: "bar",
+        data: {
+          labels: ["G&M", "Other", "Organic", "Plastic", "Paper"],
           datasets: [{
-            data: [_statsList.map(x=>x.like).reduce((x,y)=>x+y), _statsList.map(x=>x.dislike).reduce((x,y)=>x+y)],
-            backgroundColor: [
-              '#B3F02F',
-              '#EF2700',
+            label: 'Number of scanned garbage per Type',
+            barPercentage: 0.5,
+            // barThickness: 6,
+            // maxBarThickness: 8,
+            minBarLength: 2,
+            data: [
+              _statsList.filter(x=>x.predicted_class === "G&M").length,
+              _statsList.filter(x=>x.predicted_class === "Other").length,
+              _statsList.filter(x=>x.predicted_class === "Organic").length,
+              _statsList.filter(x=>x.predicted_class === "Plastic").length,
+              _statsList.filter(x=>x.predicted_class === "Paper").length,
             ],
-            hoverOffset: 4
+            backgroundColor: [ '#90ee90', '#add8e6', 'red', 'green', 'blue', ],
           }]
         },
         options:{
           responsive:true
         }
-      });*/
+      });
+
+      this.pieChart = new Chart("pieChart", {
+        type: "pie",
+        data: {
+          labels: ["G&M", "Other", "Organic", "Plastic", "Paper"],
+          datasets: [{
+            label: 'Percentage of scanned garbage per Type',
+            data: [
+              _statsList.filter(x=>x.predicted_class === "G&M").length,
+              _statsList.filter(x=>x.predicted_class === "Other").length,
+              _statsList.filter(x=>x.predicted_class === "Organic").length,
+              _statsList.filter(x=>x.predicted_class === "Plastic").length,
+              _statsList.filter(x=>x.predicted_class === "Paper").length,
+            ],
+            backgroundColor: [ '#90ee90', '#add8e6', 'red', 'green', 'blue', ],
+          }]
+        },
+        options:{
+          responsive:true,
+          plugins: {
+            legend: {
+              display: true,}
+          }
+        }
+      });
+
+
     },
     error: (err: any) => console.error(err),
     complete: () => console.log("Everything is ok")

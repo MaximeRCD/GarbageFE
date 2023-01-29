@@ -54,7 +54,7 @@ export class LogInComponent {
       // console.log(userLogged.password)
       // console.log(loginForm.get('passWord')?.value)
 
-      if ((userLogged.pseudo == loginForm.get('userName')?.value) && (userLogged.password == loginForm.get("passWord")?.value)){
+      if ((userLogged.pseudo == identifiant) && (userLogged.password == pwd)){
         console.log("User Signed in")
         router.navigate(["/"]);
         return true;

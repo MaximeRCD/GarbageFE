@@ -1,12 +1,14 @@
 import  { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {UserLogged} from "./login-service.service";
 
 @Injectable({
 providedIn: 'root'
 })
 export class RegisterService {
   apiUrl="http://localhost:8000/users/";
+  user!: UserLogged;
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');
@@ -14,9 +16,9 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(user: User){
-    return this.http.post<User>(this.apiUrl, user, {headers: this.headers}).subscribe({
+    return this.http.post<UserLogged>(this.apiUrl, user, {headers: this.headers}).subscribe({
         next: data => {
-            console.log(data)
+            this.user = data;
         },
         error: error => {
             console.error('There was an error!', error);

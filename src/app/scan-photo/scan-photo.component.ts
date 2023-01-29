@@ -1,7 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Component } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
+import {Component} from '@angular/core';
+import {WebcamImage} from 'ngx-webcam';
+import {Observable, Subject} from 'rxjs';
+import {LoginServiceService, UserLogged} from "../login-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-scan-photo',
@@ -9,6 +11,9 @@ import { Observable, Subject } from 'rxjs';
   styleUrls: ['./scan-photo.component.css']
 })
 export class ScanPhotoComponent {
+
+  user!: UserLogged;
+  isConnected!: boolean;
 
   headers= new HttpHeaders()
     .set('Content-Type', 'application/json')
@@ -31,11 +36,16 @@ export class ScanPhotoComponent {
       score : 0
     };
 
-    
 
-  constructor (private http: HttpClient){}
 
-    ngOnInit() {}
+  constructor (private http: HttpClient,
+               private ls: LoginServiceService,
+               private router: Router){}
+
+    ngOnInit() {
+      this.user = this.ls.user;
+      this.isConnected = this.ls.isConnected;
+    }
 
     /*------------------------------------------
     --------------------------------------------
@@ -53,8 +63,7 @@ export class ScanPhotoComponent {
     --------------------------------------------*/
     public handleImage(webcamImage: WebcamImage): void {
 
-        const user_name = "issa"
-        let photo_name = user_name+"_"+Date.now()+".jpeg"
+      let photo_name = this.user.pseudo+"_"+Date.now()+".jpeg"
 
         this.webcamImage = webcamImage;
         this.captureImage = webcamImage!.imageAsDataUrl;
@@ -112,15 +121,15 @@ export class ScanPhotoComponent {
 
     public getPredictedClass(photo_name:string)
     {
-     
+
       this.http.get<model_result>(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( (data: model_result) => {
-      console.log(data.class); 
+      console.log(data.class);
 
       this.result.image = data.image;
       this.result.score = data.score;
       this.result.class = data.class;
 
-      this.ResultPredicted.user_id=1;
+      this.ResultPredicted.user_id=this.user.id;
       this.ResultPredicted.predicted_class =data.class ;
       this.ResultPredicted.score = data.score;
       this.putResultPredicted(this.ResultPredicted);
@@ -138,6 +147,12 @@ export class ScanPhotoComponent {
         ),  {headers: this.headers}
     }
 
+
+  LogOut() {
+    this.ls.LogOut();
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
+  }
 }
 export interface model_result{
   image:string,

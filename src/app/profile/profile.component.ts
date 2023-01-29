@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule} from '@angular/forms';
+import {LoginServiceService, UserLogged} from "../login-service.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,15 +15,33 @@ export class ProfileComponent {
   email!: string;
   newPassword!: string;
 
+  profileForm!: FormGroup;
+  isConnected = false;
+  user!: UserLogged;
 
-  profileForm = new FormGroup({
-    name: new FormControl('Test'),
-    pseudo: new FormControl('Test'),
-    email: new FormControl('test@email.com'),
-    newPassword: new FormControl('')
-  });
+  constructor(private ls: LoginServiceService){ }
+
+  ngOnInit(){
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
+    console.log(this.user);
+    console.log(this.isConnected);
+    this.profileForm = new FormGroup({
+      name: new FormControl(this.user.pseudo),
+      pseudo: new FormControl(this.user.pseudo),
+      email: new FormControl(this.user.email),
+      newPassword: new FormControl('')
+    });
+  }
+
 
   onSubmit() {
     console.log(this.profileForm.value)
     }
+
+  LogOut() {
+    this.ls.LogOut();
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
+  }
 }

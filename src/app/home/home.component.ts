@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {LoginServiceService, UserLogged} from "../login-service.service";
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(){ }
+
+  isConnected = false;
+  user!: UserLogged;
+
+  constructor(private ls: LoginServiceService){ }
 
   // Inherit attributes from the parent component
   @Input() dashboardIndex = 0;
@@ -16,6 +21,16 @@ export class HomeComponent {
   // Dashboard properties
   public VizIndex = 'Tableau-Viz-' + this.dashboardIndex;
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
+    console.log(this.user);
+    console.log(this.isConnected);
+  }
+
+  LogOut() {
+    this.ls.LogOut();
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
   }
 }

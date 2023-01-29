@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UserStatistiqueService, Stat, UserTest } from "../user-statistique.service";
 import { Chart } from "chart.js/auto";
+import {LoginServiceService, UserLogged} from "../login-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-statistic',
@@ -8,14 +10,18 @@ import { Chart } from "chart.js/auto";
   styleUrls: ['./user-statistic.component.css']
 })
 export class UserStatisticComponent {
-  user!: UserTest;
+  //user!: UserTest;
   statsList: Stat[] = [];
   lineChart!: Chart;
   barChart!: Chart;
   pieChart!: Chart;
+  isConnected!: boolean;
+  user!: UserLogged;
 
 
-  constructor(private userStatService : UserStatistiqueService) {
+  constructor(private userStatService : UserStatistiqueService,
+              private ls: LoginServiceService,
+              private router: Router) {
   }
 
   userStatSubscriber = {
@@ -104,9 +110,17 @@ export class UserStatisticComponent {
     complete: () => console.log("Everything is ok")
   }
 
+
   ngOnInit(): void {
-    this.user = new UserTest("Max", 1, "ma@gmzil.com");
-    this.userStatService.getUserStats(this.user.user_id).subscribe(this.userStatSubscriber);
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
+    this.userStatService.getUserStats(this.user.id).subscribe(this.userStatSubscriber);
+  }
+
+  LogOut() {
+    this.ls.LogOut();
+    this.user = this.ls.user;
+    this.isConnected = this.ls.isConnected;
   }
 
 }

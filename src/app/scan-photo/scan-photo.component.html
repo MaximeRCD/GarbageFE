@@ -1,7 +1,18 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+  <a class="navbar-brand" href="#"><b>Waste sort</b></a>
+  <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
+  <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>
+  <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
+  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/login">Log In</a>
+  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
+  <p  *ngIf="isConnected"> Welcome {{user.pseudo}} </p>
+  <button class="btn btn-warning" *ngIf="isConnected" (click)="LogOut()">LogOut</button>
+  <ul class="navbar-nav"></ul>
+</nav>
 <div class="container">
-  
+
     <h4 style="text-align:center">Scanner votre objet </h4>
-  
+
     <div>
         <div style="margin-left: 25%;">
             <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" style="width:100%"></webcam>

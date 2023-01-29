@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginServiceService, UserLogged} from "../../login-service.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +16,10 @@ export class LogInComponent {
    pwd!: string;
    isValidUser!: boolean;
 
-   constructor(private loginService:LoginServiceService, private fb:FormBuilder)
+   constructor(private loginService:LoginServiceService,
+               private fb:FormBuilder,
+               private router:Router,
+)
  { }
 
   ngOnInit(): void
@@ -44,14 +48,15 @@ export class LogInComponent {
         passWord:''
       });
     }
-    function redirect(userLogged: UserLogged, loginForm: FormGroup) : boolean {
-      console.log(userLogged.pseudo)
-      console.log(loginForm.get('userName')?.value)
-      console.log(userLogged.password)
-      console.log(loginForm.get('passWord')?.value)
+    function redirect(userLogged: UserLogged, router: Router, loginForm: FormGroup) : boolean {
+      // console.log(userLogged.pseudo)
+      // console.log(loginForm.get('userName')?.value)
+      // console.log(userLogged.password)
+      // console.log(loginForm.get('passWord')?.value)
 
       if ((userLogged.pseudo == loginForm.get('userName')?.value) && (userLogged.password == loginForm.get("passWord")?.value)){
         console.log("User Signed in")
+        router.navigate(["/"]);
         return true;
       }
       console.log("User not Signed in")
@@ -60,9 +65,10 @@ export class LogInComponent {
 
      this.loginService.getLoginResponse(identifiant).subscribe(result =>{
       this.loginService.user = result;
+      this.loginService.isConnected = true;
       this.loginService.setUserLogged(this.loginService.user);
       console.log("ussr : ", this.loginService.getUserLogged())
-       this.isValidUser = redirect(this.loginService.getUserLogged(), this.loginForm)
+       this.isValidUser = redirect(this.loginService.getUserLogged(),this.router,  this.loginForm)
       },err=>{
       console.log("Something went wrong")
     })

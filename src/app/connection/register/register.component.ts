@@ -37,18 +37,21 @@ export class RegisterComponent {
   }
 
   OnSubmit() {
-    this.submitted = true;
     if(this.registerForm.valid){
       this.user.email = this.registerForm.get('email')?.value;
       this.user.pseudo = this.registerForm.get('userName')?.value;
       this.user.password = this.registerForm.get('passWord')?.value;
       this.rs.register(this.user);
+      if (this.rs.message != null){
+        this.submitted = true;
+      }
       //this.router.navigate(['/'])
     }
   }
 
   Login(){
     this.loginComp.login(this.user.pseudo, this.user.password);
+
   }
 
 }

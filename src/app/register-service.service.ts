@@ -9,6 +9,7 @@ providedIn: 'root'
 export class RegisterService {
   apiUrl="http://localhost:8000/users/";
   user!: UserLogged;
+  message!: string;
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');
@@ -19,6 +20,7 @@ export class RegisterService {
     return this.http.post<UserLogged>(this.apiUrl, user, {headers: this.headers}).subscribe({
         next: data => {
             this.user = data;
+            this.message = `${data.pseudo}`
         },
         error: error => {
             console.error('There was an error!', error);

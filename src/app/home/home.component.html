@@ -1,15 +1,3 @@
-<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <a class="navbar-brand" style="padding-left: 1rem;" href="#"><b>Waste sort</b></a>
-    <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
-    <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>
-    <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
-    <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>
-    <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
-    <a class="navbar-brand" style="margin-left:auto; text-align: center;color:white"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>
-    <a class="navbar-brand" style="margin-left:auto; color:white" *ngIf="isConnected" (click)="LogOut()">LogOut</a>
-    <ul class="navbar-nav"></ul>
-  </nav>
-
 <div class="jumbotron">
 
       <h1> Qui sommes-nous? </h1>
@@ -52,9 +40,4 @@
     <div class="tableau-viz-container" style="width: 1000px;height: 1000px; margin:auto">
          <tableau-viz [id]="VizIndex" [src]="vizUrl"></tableau-viz>
     </div>
-</div>
-
-<div class="bg-primary">
-<p>By Maxime Richaudeau, Issa Mohamed Abdoulkarim, Elyes Laiche, Eugene Yaro</p>
-  <p>@Copyright 2023</p>
 </div>

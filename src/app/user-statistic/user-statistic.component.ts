@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { UserStatistiqueService, Stat, UserTest } from "../user-statistique.service";
+import { UserStatistiqueService, Stat, UserTest } from "../services/user-statistique.service";
 import { Chart } from "chart.js/auto";
-import {LoginServiceService, UserLogged} from "../login-service.service";
+import {LoginServiceService, UserLogged} from "../services/login-service.service";
 import {Router} from "@angular/router";
+import { ApiGarbageService } from '../services/api-garbage.service';
 
 @Component({
   selector: 'app-user-statistic',
@@ -23,9 +24,11 @@ export class UserStatisticComponent {
 
 
 
+
   constructor(private userStatService : UserStatistiqueService,
               private ls: LoginServiceService,
-              private router: Router) {
+              private router: Router,
+              private apiService: ApiGarbageService) {
   }
 
   userStatSubscriber = {
@@ -121,7 +124,7 @@ export class UserStatisticComponent {
   ngOnInit(): void {
     this.user = this.ls.user;
     this.isConnected = this.ls.isConnected;
-    this.userStatService.getUserStats(this.user.id).subscribe(this.userStatSubscriber);
+    this.apiService.getUserStats(this.user.id).subscribe(this.userStatSubscriber),{headers: this.apiService.headers};
     this.total_prediction = this.statsList.length;
   }
 

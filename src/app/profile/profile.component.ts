@@ -1,9 +1,10 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {LoginServiceService, UserLogged} from "../login-service.service";
+import {LoginServiceService, UserLogged} from "../services/login-service.service";
 import {Md5} from "ts-md5";
 import {Router} from "@angular/router";
+import { ApiGarbageService } from '../services/api-garbage.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +13,12 @@ import {Router} from "@angular/router";
 })
 export class ProfileComponent {
 
-  Apiurl = 'http://localhost:8000/'
+  // Apiurl = 'http://localhost:8000/'
 
-  headers= new HttpHeaders()
-  .set('Content-Type', 'application/json')
-  .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-  .set('Access-Control-Allow-Origin', '*');
+  // headers= new HttpHeaders()
+  // .set('Content-Type', 'application/json')
+  // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+  // .set('Access-Control-Allow-Origin', '*');
 
 /* Data come from our database */
   name!: string;
@@ -31,7 +32,8 @@ export class ProfileComponent {
 
   constructor(private ls: LoginServiceService,
               private http: HttpClient,
-              private router: Router,){ }
+              private router: Router,
+              private apiService: ApiGarbageService){ }
 
   ngOnInit(){
     this.user = this.ls.user;
@@ -49,26 +51,26 @@ export class ProfileComponent {
   }
 
   onSubmit() {
-    this.http.put(`${this.Apiurl}users/${this.user.pseudo}/reset_pwd?pwd=${this.user.password}&new_pwd=${Md5.hashStr(this.profileForm.value.newPassword)}`, 0).subscribe(
+    this.apiService.putResetPwd(this.user.pseudo,this.user.password,this.profileForm.value.newPassword).subscribe(
         (response) => {
           console.log(response);
           this.user.password = Md5.hashStr(this.profileForm.value.newPassword);
         },
         (error) => console.log(error)
-        ),  {headers: this.headers}
+        ),  {headers: this.apiService.headers}
     console.log(`after submit ${this.user.password}`)
     }
 
   Ondelete() {
 
-    this.http.delete(`${this.Apiurl}users/${this.user.pseudo}?pseudo=${this.user.pseudo}&pwd=${this.user.password}`).subscribe(
+    this.apiService.deleteUser(this.user.pseudo,this.user.password).subscribe(
       (response) => {
         console.log(response);
         this.ls.isConnected = false;
         this.router.navigate(['/']);
       },
       (error) => console.log(error)
-      ),  {headers: this.headers}
+      ),  {headers: this.apiService.headers}
   }
 
   LogOut() {

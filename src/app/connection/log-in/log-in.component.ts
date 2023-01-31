@@ -18,6 +18,7 @@ export class LogInComponent {
    pwd!: string;
    isValidUser = true;
    is_valid_form = true;
+   showPassword = false;
 
    constructor(private loginService:LoginServiceService,
                private fb:FormBuilder,
@@ -34,8 +35,7 @@ export class LogInComponent {
       )]]
     })
   }
-
-
+  
   OnSubmit() {
     this.submitted = true;
     if(this.loginForm.valid){

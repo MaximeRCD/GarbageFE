@@ -1,24 +1,50 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<!-- <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>Log in</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="loginForm" class="example-form">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input  matInput  formControlName="userName" placeholder="Username">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput formControlName="passWord" placeholder="Password">
-        </mat-form-field>
+    <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+          <input class="form-control" formControlName="userName" placeholder="Username">
+          <input class="form-control" [type]="showPassword ? 'text' : 'password'" placeholder="Password "formControlName="passWord">
+          <button (click)="showPassword = !showPassword">{{ showPassword ? 'Hide' : 'Show' }}</button> 
         <p class="text-danger" *ngIf="!is_valid_form">Password must be an 8 to 12 string containing UpperCase and LowerCase letters, digits and special characters</p>
-      </mat-card-content>
       <p class="text-danger" *ngIf="!isValidUser">Wrong Password, Please verify your information. </p>
       <p class="text-danger" *ngIf="!isValidUser">Or click on Forgot Password Button </p>
-      <button mat-stroked-button color="accent" class="btn-block" (click)="OnSubmit()">Log in</button>
+      <button type="submit" class="btn btn-primary">Log in</button>
     </form>
   </mat-card>
-</div>
+</div> -->
+
+
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-4 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <h2 style="text-align: center; padding-top:0.5rem">Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+                <div class="card-body">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3" style="margin-left:25%">
+                      <input class="form-control" type="text" formControlName="userName" placeholder="Username">
+                    </div>
+                    <div class="col-6 mb-3" style="margin:auto; display:flex;">
+                      <input class="form-control" [type]="showPassword ? 'text' : 'password'" placeholder="Password "formControlName="passWord">
+                      <img [src]="showPassword ? 'assets\\hidden.png' : 'assets\\view.png'" (click)="showPassword = !showPassword;" style="height: 16px; width: 16px; margin:auto; margin-left:0.5rem">
+              
+
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </div>
+                </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 

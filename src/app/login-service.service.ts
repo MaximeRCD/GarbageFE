@@ -15,12 +15,9 @@ export class LoginServiceService {
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');
 
-
-
   constructor(private http: HttpClient,
               private router: Router)
  { }
-
 
   getLoginResponse(identifiant: string): Observable<UserLogged> {
     return this.http.get<UserLogged>(`${this.apiUrl}/${identifiant}`,
@@ -39,9 +36,9 @@ export class LoginServiceService {
     return JSON.parse(localStorage.getItem("user")?? '');
   }
 
-
   LogOut() {
     this.isConnected = false;
+    this.resetUserLogged();
     this.router.navigate(["/"])
   }
 }

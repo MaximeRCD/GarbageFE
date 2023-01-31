@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginServiceService, UserLogged} from "../../login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Md5} from "ts-md5";
 
 
@@ -23,8 +23,9 @@ export class LogInComponent {
    constructor(private loginService:LoginServiceService,
                private fb:FormBuilder,
                private router:Router,
+               // private route: ActivatedRoute
 )
- { }
+ {}
 
   ngOnInit(): void
   {
@@ -35,7 +36,8 @@ export class LogInComponent {
       )]]
     })
   }
-  
+
+
   OnSubmit() {
     this.submitted = true;
     if(this.loginForm.valid){
@@ -56,17 +58,32 @@ export class LogInComponent {
         passWord:'',
       });
     }
-    function redirect(userLogged: UserLogged, router: Router, loginForm: FormGroup) : boolean {
+
+    function redirect(userLogged: UserLogged, router: Router,  loginForm: FormGroup) : boolean {
+
+      // function redirect_forced(uri:string){
+      //   router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      //     router.navigate([uri]));
+      // }
+
       // console.log(userLogged.pseudo)
       // console.log(loginForm.get('userName')?.value)
       // console.log(userLogged.password)
       // console.log(loginForm.get('passWord')?.value)
+      //
+      // function backToPreviousPage() {
+      //   router.navigate(
+      //     [route.snapshot.queryParams['redirectTo']]
+      //   );
+      // }
 
       if ((userLogged.pseudo == identifiant) && (userLogged.password == pwd)){
-        console.log("User Signed in")
-        router.navigate(["/"]);
+        router.navigate(['']) .then(() => {
+          window.location.reload();
+        });
         clear(loginForm);
         loginForm.disable();
+        console.log("User Signed in")
         return true;
       }
       console.log("User not Signed in")

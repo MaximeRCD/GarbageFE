@@ -15,7 +15,7 @@ const routes: Routes = [
     {path: 'userstat', component: UserStatisticComponent},
     {path: 'scanner', component: ScanPhotoComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'login', component: LogInComponent },
+    {path: 'login', component: LogInComponent},
     {path: 'register', component: RegisterComponent },
   ]}
   ];

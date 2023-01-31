@@ -24,9 +24,7 @@ export class ProfileComponent {
   pseudo!: string;
   email!: string;
   newPassword!: string;
-
   profileForm!: FormGroup;
-  isConnected = false;
   user!: UserLogged;
 
   constructor(private ls: LoginServiceService,
@@ -34,10 +32,8 @@ export class ProfileComponent {
               private router: Router,){ }
 
   ngOnInit(){
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
+    this.user = this.ls.getUserLogged();
     console.log(this.user);
-    console.log(this.isConnected);
     this.profileForm = new FormGroup({
       name: new FormControl(this.user.pseudo),
       pseudo: new FormControl(this.user.pseudo),
@@ -63,9 +59,7 @@ export class ProfileComponent {
 
     this.http.delete(`${this.Apiurl}users/${this.user.pseudo}?pseudo=${this.user.pseudo}&pwd=${this.user.password}`).subscribe(
       (response) => {
-        console.log(response);
-        this.ls.isConnected = false;
-        this.router.navigate(['/']);
+        this.LogOut();
       },
       (error) => console.log(error)
       ),  {headers: this.headers}
@@ -73,7 +67,6 @@ export class ProfileComponent {
 
   LogOut() {
     this.ls.LogOut();
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
+
   }
 }

@@ -8,9 +8,6 @@ import {LoginServiceService, UserLogged} from "../login-service.service";
 })
 export class HomeComponent {
 
-  isConnected = false;
-  user!: UserLogged;
-
   constructor(private ls: LoginServiceService){ }
 
   // Inherit attributes from the parent component
@@ -21,16 +18,4 @@ export class HomeComponent {
   // Dashboard properties
   public VizIndex = 'Tableau-Viz-' + this.dashboardIndex;
 
-  ngOnInit(){
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-    console.log(this.user);
-    console.log(this.isConnected);
-  }
-
-  LogOut() {
-    this.ls.LogOut();
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-  }
 }

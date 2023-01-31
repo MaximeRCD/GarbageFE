@@ -21,6 +21,7 @@ export class ScanPhotoComponent {
     .set('Access-Control-Allow-Origin', '*');
 
     popup:boolean = false;
+    availableResult:boolean = false;
     private trigger = new Subject();
     public webcamImage!: WebcamImage;
     private nextWebcam = new Subject();
@@ -123,11 +124,12 @@ export class ScanPhotoComponent {
     {
 
       this.http.get<model_result>(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( (data: model_result) => {
-      console.log(data.class);
-
+      //console.log(data.class);
+      
       this.result.image = data.image;
       this.result.score = data.score;
       this.result.class = data.class;
+      setTimeout(() => {this.availableResult = true}, 1500);
 
       this.ResultPredicted.user_id=this.user.id;
       this.ResultPredicted.predicted_class =data.class ;

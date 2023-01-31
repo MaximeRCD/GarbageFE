@@ -4,6 +4,7 @@ import {RegisterService, User} from "../../register-service.service";
 import {Router} from "@angular/router";
 import {LoginServiceService} from "../../login-service.service";
 import {LogInComponent} from "../log-in/log-in.component";
+import {Md5} from "ts-md5";
 
 @Component({
 selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterComponent {
   constructor(private rs: RegisterService,
               private fb:FormBuilder,
               private router: Router,
-              private ls: LoginServiceService) {
+              private ls: LoginServiceService,
+  ) {
     this.loginComp = new LogInComponent(this.ls, this.fb, this.router)
   }
 
@@ -46,7 +48,7 @@ export class RegisterComponent {
       this.submitted = true;
       this.user.email = this.registerForm.get('email')?.value;
       this.user.pseudo = this.registerForm.get('userName')?.value;
-      this.user.password = this.registerForm.get('passWord')?.value;
+      this.user.password = Md5.hashStr(this.registerForm.get('passWord')?.value);
       this.rs.register(this.user);
       //this.router.navigate(['/login'])
     }

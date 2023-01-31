@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import {LogInComponent} from "./connection/log-in/log-in.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BaselineComponent } from './baseline/baseline.component';
 
 
 
@@ -28,6 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomeComponent,
     LogInComponent,
     RegisterComponent,
+    BaselineComponent,
   ],
   imports: [
     FlexLayoutModule,

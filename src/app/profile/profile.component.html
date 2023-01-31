@@ -3,10 +3,10 @@
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
-  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/login">Log In</a>
+  <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>
   <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
   <p  *ngIf="isConnected"> Welcome {{user.pseudo}} </p>
-  <button class="btn btn-warning" *ngIf="isConnected" (click)="LogOut()">LogOut</button>
+  <a class="navbar-brand" style="margin-left:auto" *ngIf="isConnected" (click)="LogOut()">LogOut</a>
   <ul class="navbar-nav"></ul>
 </nav>
 

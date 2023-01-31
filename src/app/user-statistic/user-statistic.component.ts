@@ -30,6 +30,7 @@ export class UserStatisticComponent {
     next: (_statsList: Stat[]) =>{
       _statsList.forEach((sl:Stat) => {
         this.statsList.push(sl);
+
       })
 
       function SetToList(_set: Set<string>): string[]{
@@ -105,6 +106,7 @@ export class UserStatisticComponent {
           }
         }
       });
+      this.total_prediction = _statsList.length;
 
 
     },
@@ -126,6 +128,6 @@ export class UserStatisticComponent {
     this.isConnected = this.ls.isConnected;
   }
 
-  
+
 
 }

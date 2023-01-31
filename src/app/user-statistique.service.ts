@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class UserStatistiqueService {
 
-  apiUrl="http://localhost:7999/scans";
+  apiUrl="http://localhost:8000/scans";
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');

@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {LoginServiceService, UserLogged} from "../../login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {Md5} from "ts-md5";
+
 
 @Component({
   selector: 'app-log-in',
@@ -38,7 +40,7 @@ export class LogInComponent {
     this.submitted = true;
     if(this.loginForm.valid){
       this.identifiant = this.loginForm.get('userName')?.value;
-      this.pwd = this.loginForm.get('passWord')?.value;
+      this.pwd = Md5.hashStr(this.loginForm.get('passWord')?.value);
       this.login(this.identifiant, this.pwd);
     }
     else{

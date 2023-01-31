@@ -1,16 +1,31 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-  <a class="navbar-brand" href="#"><b>Waste sort</b></a>
-  <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
-  <a class="navbar-brand" *ngIf="isConnected" routerLink="/Profile">Your Profile</a>
-  <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
-  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/login">Log In</a>
-  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
-  <p  *ngIf="isConnected"> Welcome {{user.pseudo}} </p>
-  <button class="btn btn-warning" *ngIf="isConnected" (click)="LogOut()">LogOut</button>
-  <ul class="navbar-nav"></ul>
-</nav>
+    <a class="navbar-brand" style="padding-left: 1rem;" href="#"><b>Waste sort</b></a>
+    <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
+    <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>
+    <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
+    <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>
+    <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
+    <a class="navbar-brand" style="margin-left:auto; text-align: center;color:white"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>
+    <a class="navbar-brand" style="margin-left:auto; color:white" *ngIf="isConnected" (click)="LogOut()">LogOut</a>
+    <ul class="navbar-nav"></ul>
+  </nav>
 
 <div class="jumbotron">
+
+      <h1> Qui sommes-nous? </h1>
+    <p>
+        <i>
+          Nous sommes une entreprise permettant de gérer les déchets en France.
+          Nous proposons une solution qui permet de trier les déchets suivant un modèle d'IA en les séparant en 5 classes :
+          - Plastique , Papier-carton , Métal et glace ,Organique , Non-recyclable
+          Notre projet consiste à démontrer le potentiel de l'IA dans la gestion des déchets et dans les systèmes de tri aidant dans le recyclage des produits.
+
+        </i>
+    </p>
+    </div>
+
+<div class="jumbotron">
+   <h1> Bon à savoir !!! </h1>
     <p>
         <i>
             Il est important de trier les déchets pour protéger l'environnement et améliorer l'efficacité des processus de recyclage.
@@ -28,7 +43,18 @@
 <div class="tableau-wrapper">
     <div class="tableau-toolbar">
     </div>
+
+  <div class="jumbotron">
+  <h3> Quelques statistiques générales sur les déchets en fonction des différents départements de France </h3>
+
+     </div>
+
     <div class="tableau-viz-container" style="width: 1000px;height: 1000px; margin:auto">
          <tableau-viz [id]="VizIndex" [src]="vizUrl"></tableau-viz>
     </div>
+</div>
+
+<div class="bg-primary">
+<p>By Maxime Richaudeau, Issa Mohamed Abdoulkarim, Elyes Laiche, Eugene Yaro</p>
+  <p>@Copyright 2023</p>
 </div>

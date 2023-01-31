@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RegisterService, User} from "../../register-service.service";
 import {Router} from "@angular/router";
 import {LoginServiceService} from "../../login-service.service";
 import {LogInComponent} from "../log-in/log-in.component";
+import {Md5} from "ts-md5";
 
 @Component({
 selector: 'app-register',
@@ -16,11 +17,13 @@ export class RegisterComponent {
   submitted = false;
   registerForm!: FormGroup;
   loginComp!: LogInComponent;
+  is_valid_form = true;
 
   constructor(private rs: RegisterService,
               private fb:FormBuilder,
               private router: Router,
-              private ls: LoginServiceService) {
+              private ls: LoginServiceService,
+  ) {
     this.loginComp = new LogInComponent(this.ls, this.fb, this.router)
   }
 
@@ -28,8 +31,11 @@ export class RegisterComponent {
   {
     this.registerForm = this.fb.group({
       userName:[''],
-      passWord:[''],
-      email:[''],
+      passWord:['',[Validators.required,Validators.pattern(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
+      )]],
+      email:['',[Validators.required,Validators.email]],
+
     })
     this.user.email = "";
     this.user.pseudo = "";
@@ -37,15 +43,22 @@ export class RegisterComponent {
   }
 
   OnSubmit() {
-    this.submitted = true;
     if(this.registerForm.valid){
+      this.is_valid_form = true;
+      this.submitted = true;
       this.user.email = this.registerForm.get('email')?.value;
       this.user.pseudo = this.registerForm.get('userName')?.value;
-      this.user.password = this.registerForm.get('passWord')?.value;
+      this.user.password = Md5.hashStr(this.registerForm.get('passWord')?.value);
       this.rs.register(this.user);
-      this.loginComp.login(this.user.pseudo, this.user.password);
-      //this.router.navigate(['/'])
+      //this.router.navigate(['/login'])
     }
+    else{
+      this.is_valid_form = false
+    }
+  }
+
+  Login(){
+    this.loginComp.login(this.user.pseudo, this.user.password);
   }
 
 }

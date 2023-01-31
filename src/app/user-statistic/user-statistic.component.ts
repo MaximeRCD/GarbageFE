@@ -18,6 +18,8 @@ export class UserStatisticComponent {
   isConnected!: boolean;
   user!: UserLogged;
 
+  total_prediction! : number;
+
 
   constructor(private userStatService : UserStatistiqueService,
               private ls: LoginServiceService,
@@ -28,6 +30,7 @@ export class UserStatisticComponent {
     next: (_statsList: Stat[]) =>{
       _statsList.forEach((sl:Stat) => {
         this.statsList.push(sl);
+
       })
 
       function SetToList(_set: Set<string>): string[]{
@@ -103,6 +106,7 @@ export class UserStatisticComponent {
           }
         }
       });
+      this.total_prediction = _statsList.length;
 
 
     },
@@ -115,6 +119,7 @@ export class UserStatisticComponent {
     this.user = this.ls.user;
     this.isConnected = this.ls.isConnected;
     this.userStatService.getUserStats(this.user.id).subscribe(this.userStatSubscriber);
+    this.total_prediction = this.statsList.length;
   }
 
   LogOut() {
@@ -122,5 +127,7 @@ export class UserStatisticComponent {
     this.user = this.ls.user;
     this.isConnected = this.ls.isConnected;
   }
+
+
 
 }

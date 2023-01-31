@@ -11,11 +11,15 @@
         <mat-form-field class="example-full-width">
           <input  formControlName="passWord" matInput placeholder="Password">
         </mat-form-field>
+        <p class="text-danger" *ngIf="!is_valid_form">Password must be an 8 to 12 string containing UpperCase and LowerCase letters, digits and special characters</p>
         <mat-form-field class="example-full-width">
           <input matInput formControlName="email" placeholder="Email">
         </mat-form-field>
+        <p class="text-danger" *ngIf="!is_valid_form">This might not be a valid mail address</p>
       </mat-card-content>
       <button mat-stroked-button color="accent" class="btn-block" (click)="OnSubmit()">Register</button>
+      <p *ngIf="submitted"> The user {{user.pseudo}} has been created</p>
+      <button mat-stroked-button color="accent" class="btn-block" (click)="Login()">Login</button>
     </form>
   </mat-card>
 </div>

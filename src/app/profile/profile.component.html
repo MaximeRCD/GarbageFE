@@ -1,12 +1,12 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-  <a class="navbar-brand" href="#"><b>Waste sort</b></a>
+  <a class="navbar-brand" style="padding-left: 1rem;" href="#"><b>Waste sort</b></a>
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>
   <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>
-  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/login">Log In</a>
+  <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>
   <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>
-  <p  *ngIf="isConnected"> Welcome {{user.pseudo}} </p>
-  <button class="btn btn-warning" *ngIf="isConnected" (click)="LogOut()">LogOut</button>
+  <a class="navbar-brand" style="margin-left:auto; text-align: center;color:white"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>
+  <a class="navbar-brand" style="margin-left:auto; color:white" *ngIf="isConnected" (click)="LogOut()">LogOut</a>
   <ul class="navbar-nav"></ul>
 </nav>
 
@@ -47,12 +47,14 @@
                           </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                          <button type="submit" class="btn btn-success">update</button>
+                          <button *ngIf="profileForm.valid" type="submit" class="btn btn-success">update</button>
+                          <p *ngIf="!profileForm.valid" class="text-danger"> New password has to be conform ! </p>
                         </div>
                       </div>
                     </div>
                   </div>
               </form>
+              <button class="btn btn-success" (click)="Ondelete()">delete</button>
           </div>
         </div>
       </div>

@@ -19,6 +19,8 @@ export class UserStatisticComponent {
   user!: UserLogged;
 
   total_prediction! : number;
+  prediction_avg_score! : number;
+
 
 
   constructor(private userStatService : UserStatistiqueService,
@@ -107,6 +109,7 @@ export class UserStatisticComponent {
         }
       });
       this.total_prediction = _statsList.length;
+      this.prediction_avg_score = _statsList.map(x=> x.score).reduce((x,y)=> x+y) / this.total_prediction * 100
 
 
     },

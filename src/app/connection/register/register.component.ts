@@ -43,9 +43,12 @@ export class RegisterComponent {
       this.user.pseudo = this.registerForm.get('userName')?.value;
       this.user.password = this.registerForm.get('passWord')?.value;
       this.rs.register(this.user);
-      this.loginComp.login(this.user.pseudo, this.user.password);
       //this.router.navigate(['/'])
     }
+  }
+
+  Login(){
+    this.loginComp.login(this.user.pseudo, this.user.password);
   }
 
 }

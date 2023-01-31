@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LoginServiceService, UserLogged} from "../login-service.service";
 import {Md5} from "ts-md5";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,9 @@ export class ProfileComponent {
   isConnected = false;
   user!: UserLogged;
 
-  constructor(private ls: LoginServiceService, private http: HttpClient){ }
+  constructor(private ls: LoginServiceService,
+              private http: HttpClient,
+              private router: Router,){ }
 
   ngOnInit(){
     this.user = this.ls.user;
@@ -61,6 +64,8 @@ export class ProfileComponent {
     this.http.delete(`${this.Apiurl}users/${this.user.pseudo}?pseudo=${this.user.pseudo}&pwd=${this.user.password}`).subscribe(
       (response) => {
         console.log(response);
+        this.ls.isConnected = false;
+        this.router.navigate(['/']);
       },
       (error) => console.log(error)
       ),  {headers: this.headers}

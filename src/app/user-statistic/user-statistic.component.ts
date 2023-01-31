@@ -18,6 +18,8 @@ export class UserStatisticComponent {
   isConnected!: boolean;
   user!: UserLogged;
 
+  total_prediction! : number;
+
 
   constructor(private userStatService : UserStatistiqueService,
               private ls: LoginServiceService,
@@ -115,6 +117,7 @@ export class UserStatisticComponent {
     this.user = this.ls.user;
     this.isConnected = this.ls.isConnected;
     this.userStatService.getUserStats(this.user.id).subscribe(this.userStatSubscriber);
+    this.total_prediction = this.statsList.length;
   }
 
   LogOut() {
@@ -122,5 +125,7 @@ export class UserStatisticComponent {
     this.user = this.ls.user;
     this.isConnected = this.ls.isConnected;
   }
+
+  
 
 }

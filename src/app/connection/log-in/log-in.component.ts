@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginServiceService, UserLogged} from "../../login-service.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,8 @@ export class LogInComponent {
    loginForm!: FormGroup;
    identifiant!: string;
    pwd!: string;
-   isValidUser!: boolean;
+   isValidUser = true;
+   is_valid_form = true;
 
    constructor(private loginService:LoginServiceService,
                private fb:FormBuilder,
@@ -25,8 +26,10 @@ export class LogInComponent {
   ngOnInit(): void
   {
     this.loginForm = this.fb.group({
-      userName:[''],
-      passWord:[''],
+      userName:'',
+      passWord:['',[Validators.required,Validators.pattern(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
+      )]]
     })
   }
 
@@ -38,6 +41,9 @@ export class LogInComponent {
       this.pwd = this.loginForm.get('passWord')?.value;
       this.login(this.identifiant, this.pwd);
     }
+    else{
+      this.is_valid_form = false;
+    }
   }
 
 
@@ -45,7 +51,7 @@ export class LogInComponent {
     function clear(lf: FormGroup){
       lf.patchValue({
         userName:'',
-        passWord:''
+        passWord:'',
       });
     }
     function redirect(userLogged: UserLogged, router: Router, loginForm: FormGroup) : boolean {
@@ -57,10 +63,13 @@ export class LogInComponent {
       if ((userLogged.pseudo == identifiant) && (userLogged.password == pwd)){
         console.log("User Signed in")
         router.navigate(["/"]);
+        clear(loginForm);
+        loginForm.disable();
         return true;
       }
       console.log("User not Signed in")
-        return false;
+      clear(loginForm);
+      return false;
        }
 
      this.loginService.getLoginResponse(identifiant).subscribe(result =>{

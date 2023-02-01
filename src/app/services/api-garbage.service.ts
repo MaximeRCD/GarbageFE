@@ -51,7 +51,7 @@ postRegister(user: User){
 }
 
 putResetPwd(pseudo: string, oldPwd: string, newPwd: string){
-  return this.http.put(`${this.apiUrl}users/${pseudo}/reset_pwd?pwd=${oldPwd}&new_pwd=${Md5.hashStr(newPwd)}`, 0)
+  return this.http.put(`${this.apiUrl}/users/${pseudo}/reset_pwd?pwd=${oldPwd}&new_pwd=${Md5.hashStr(newPwd)}`, 0)
 }
 
 putResultPredictedOnBdd(data : resutTosave){

@@ -58,13 +58,15 @@ export class ProfileComponent {
     }
 
   Ondelete() {
-
+    const Confirmation = confirm("Are you sure you want to do that?");
+    if(Confirmation){
     this.apiService.deleteUser(this.user.pseudo,this.user.password).subscribe(
       (response) => {
         this.LogOut();
       },
       (error) => console.log(error)
       ),  {headers: this.apiService.headers}
+    }
   }
 
   LogOut() {

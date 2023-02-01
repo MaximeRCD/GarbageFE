@@ -20,10 +20,12 @@
                 <div class="row g-0">
                     <div class="col-md-4 gradient-custom text-center text-white"
                       style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                      <img src="http://pngimg.com/uploads/linux/linux_PNG1.png"
-                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                      <h5>{{user.pseudo}}</h5>
+                      <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png"
+                        alt="Avatar" class="img-fluid my-5" style="width: 100px;" />
                       <i class="far fa-edit mb-5"></i>
+                      <div class="col-md-12 gradient-custom text-center text-white">
+                        <button class="btn btn-primary" (click)="Ondelete()" >delete profile</button>
+                      </div>
                     </div>
                     <div class="col-md-8">
                       <div class="card-body p-4">
@@ -47,14 +49,13 @@
                           </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                          <button *ngIf="profileForm.valid" type="submit" class="btn btn-success">update</button>
-                          <p *ngIf="!profileForm.valid" class="text-danger"> New password has to be conform ! </p>
+                          <button *ngIf="profileForm.valid" type="submit" class="btn btn-primary">Update password</button>
+                          <p *ngIf="(!profileForm.valid) && (profileForm.value.newPassword != '')" class="text-danger"> New password has to be conform ! </p>
                         </div>
                       </div>
                     </div>
                   </div>
-              </form>
-              <button class="btn btn-success" (click)="Ondelete()">delete</button>
+              </form>              
           </div>
         </div>
       </div>

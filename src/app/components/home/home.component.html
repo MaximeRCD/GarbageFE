@@ -1,43 +1,44 @@
-<div class="jumbotron">
+<section class="pt-5 padding-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row justify-content-center mt-5">
+                    <div class="tableau-viz-container" style="width: 1200px;height: 650px; margin:auto">
+                        <tableau-viz [id]="VizIndex" [src]="vizUrl" style="margin-left: 7.5%;"></tableau-viz>
+                   </div>
+                </div>
 
-      <h1> Qui sommes-nous? </h1>
-    <p>
-        <i>
-          Nous sommes une entreprise permettant de gérer les déchets en France.
-          Nous proposons une solution qui permet de trier les déchets suivant un modèle d'IA en les séparant en 5 classes :
-          - Plastique , Papier-carton , Métal et glace ,Organique , Non-recyclable
-          Notre projet consiste à démontrer le potentiel de l'IA dans la gestion des déchets et dans les systèmes de tri aidant dans le recyclage des produits.
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="text-uppercase letter-spacing mb-4"><b>Qui sommes-nous ?</b></h5>
+                                <p>
+                                    Nous sommes une entreprise permettant de gérer les déchets en France.
+                                    Nous proposons une solution qui permet de trier les déchets suivant un modèle d'IA en les séparant en 5 classes :
+                                    - Plastique , Papier-carton , Métal et glace ,Organique , Non-recyclable
+                                    Notre projet consiste à démontrer le potentiel de l'IA dans la gestion des déchets et dans les systèmes de tri aidant dans le recyclage des produits.
+                                </p>
 
-        </i>
-    </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="text-uppercase letter-spacing mb-4"><b>Bon à savoir</b></h5>
+                                <p>
+                                    Il est important de trier les déchets pour protéger l'environnement et améliorer l'efficacité des processus de recyclage.
+                                    Les matières recyclables, telles que le papier et le métal, peuvent être réutilisées à plusieurs reprises si elles sont correctement
+                                    triées, ce qui réduit la nécessité d'extraire de nouvelles matières premières. Les déchets non recyclables, tels que les déchets
+                                    organiques, peuvent être compostés et utilisés comme engrais naturel. Les déchets qui ne peuvent pas être recyclés ou compostés
+                                    doivent être stockés dans des décharges, ce qui peut causer des problèmes environnementaux tels que la pollution de l'air et
+                                    de l'eau. Les modèles d'IA sont utilisés pour trier les déchets de manière automatisée. Les caméras et les capteurs sont utilisés
+                                    pour détecter les matières recyclables et les diriger vers les bons conteneurs, tandis que les algorithmes d'IA peuvent être
+                                    utilisés pour classer les déchets en fonction de leur composition chimique. Cela permet de trier les déchets de manière plus
+                                    efficace et plus précise, ce qui contribue à améliorer les taux de recyclage et à protéger l'environnement.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-<div class="jumbotron">
-   <h1> Bon à savoir !!! </h1>
-    <p>
-        <i>
-            Il est important de trier les déchets pour protéger l'environnement et améliorer l'efficacité des processus de recyclage.
-            Les matières recyclables, telles que le papier et le métal, peuvent être réutilisées à plusieurs reprises si elles sont correctement
-            triées, ce qui réduit la nécessité d'extraire de nouvelles matières premières. Les déchets non recyclables, tels que les déchets
-            organiques, peuvent être compostés et utilisés comme engrais naturel. Les déchets qui ne peuvent pas être recyclés ou compostés
-            doivent être stockés dans des décharges, ce qui peut causer des problèmes environnementaux tels que la pollution de l'air et
-            de l'eau. Les modèles d'IA sont utilisés pour trier les déchets de manière automatisée. Les caméras et les capteurs sont utilisés
-            pour détecter les matières recyclables et les diriger vers les bons conteneurs, tandis que les algorithmes d'IA peuvent être
-            utilisés pour classer les déchets en fonction de leur composition chimique. Cela permet de trier les déchets de manière plus
-            efficace et plus précise, ce qui contribue à améliorer les taux de recyclage et à protéger l'environnement.
-        </i>
-    </p>
-    </div>
-<div class="tableau-wrapper">
-    <div class="tableau-toolbar">
-    </div>
-
-  <div class="jumbotron">
-  <h3> Quelques statistiques générales sur les déchets en fonction des différents départements de France </h3>
-
-     </div>
-
-    <div class="tableau-viz-container" style="width: 1000px;height: 1000px; margin:auto">
-         <tableau-viz [id]="VizIndex" [src]="vizUrl"></tableau-viz>
-    </div>
-</div>
+</section>

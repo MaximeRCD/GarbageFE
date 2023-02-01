@@ -59,25 +59,12 @@ export class LogInComponent {
       });
     }
 
-    function redirect(userLogged: UserLogged, router: Router,  loginForm: FormGroup) : boolean {
+    function redirect(ls: LoginServiceService, router: Router,  loginForm: FormGroup) : boolean {
 
-      // function redirect_forced(uri:string){
-      //   router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      //     router.navigate([uri]));
-      // }
-
-      // console.log(userLogged.pseudo)
-      // console.log(loginForm.get('userName')?.value)
-      // console.log(userLogged.password)
-      // console.log(loginForm.get('passWord')?.value)
-      //
-      // function backToPreviousPage() {
-      //   router.navigate(
-      //     [route.snapshot.queryParams['redirectTo']]
-      //   );
-      // }
-
-      if ((userLogged.pseudo == identifiant) && (userLogged.password == pwd)){
+      if ((ls.user.pseudo == identifiant) && (ls.user.password == pwd)){
+        ls.isConnected = true;
+        ls.setUserLogged(ls.user);
+        console.log("ussr : ", ls.getUserLogged());
         router.navigate(['']) .then(() => {
           window.location.reload();
         });
@@ -92,11 +79,8 @@ export class LogInComponent {
        }
 
      this.loginService.getLoginResponse(identifiant).subscribe(result =>{
-      this.loginService.user = result;
-      this.loginService.isConnected = true;
-      this.loginService.setUserLogged(this.loginService.user);
-      console.log("ussr : ", this.loginService.getUserLogged())
-       this.isValidUser = redirect(this.loginService.getUserLogged(),this.router,  this.loginForm)
+       this.loginService.user = result;
+      this.isValidUser = redirect(this.loginService,this.router,  this.loginForm)
       },err=>{
       console.log("Something went wrong")
     })

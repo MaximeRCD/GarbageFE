@@ -39,7 +39,9 @@ export class LoginServiceService {
   LogOut() {
     this.isConnected = false;
     this.resetUserLogged();
-    this.router.navigate(["/"])
+    this.router.navigate([""]).then(() => {
+      window.location.reload();
+    });
   }
 }
 

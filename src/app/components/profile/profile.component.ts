@@ -58,7 +58,6 @@ export class ProfileComponent {
     }
 
   Ondelete() {
-
     this.apiService.deleteUser(this.user.pseudo,this.user.password).subscribe(
       (response) => {
         this.LogOut();

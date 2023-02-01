@@ -1,26 +1,15 @@
-<!--<nav class="navbar navbar-dark bg-primary navbar-expand-lg">-->
-<!--    <a class="navbar-brand" style="padding-left: 1rem;" href="#"><b>Waste sort</b></a>-->
-<!--    <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>-->
-<!--    <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>-->
-<!--    <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>-->
-<!--    <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>-->
-<!--    <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>-->
-<!--    <a class="navbar-brand" style="margin-left:auto; text-align: center;color:white"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>-->
-<!--    <a class="navbar-brand" style="margin-left:auto; color:white" *ngIf="isConnected" (click)="LogOut()">LogOut</a>-->
-<!--    <ul class="navbar-nav"></ul>-->
-<!--  </nav>-->
 <div class="container">
 
-    <h4 style="text-align:center">Scanner votre objet </h4>
+    <!-- <h2 class="mt-4 mb-3" style="text-align:center" >Scanner votre objet</h2> -->
 
-    <div>
+    <div *ngIf="!popup">
         <div style="margin-left: 25%;">
             <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" style="width:100%"></webcam>
         </div>
         <button class="btn btn-primary" (click)="triggerSnapshot(); popup = true;" style="width:30%; margin-left: 35%;">Take A Snapshot</button>
     </div>
 
-    <div class="overlay" *ngIf="popup">
+    <div class="overlay_ScanPhoto" *ngIf="popup">
         <div class="popup">
             <div id="results"style="text-align:center">Votre image capturée</div>
             <a class="close" (click)="popup = false; availableResult = false;">&times;</a>

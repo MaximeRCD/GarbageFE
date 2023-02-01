@@ -117,7 +117,7 @@ export class UserStatisticComponent {
   }
 
   ngOnInit(): void {
-    this.user = this.ls.user;
+    this.user = this.ls.getUserLogged();
     this.apiService.getUserStats(this.user.id).subscribe(this.userStatSubscriber),{headers: this.apiService.headers};
 
   }

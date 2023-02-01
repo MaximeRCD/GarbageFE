@@ -1,0 +1,37 @@
+<!--<nav class="navbar navbar-dark bg-primary navbar-expand-lg">-->
+<!--  <a class="navbar-brand" style="padding-left: 1rem;" href="#"><b>Waste sort</b></a>-->
+<!--  <a class="navbar-brand" *ngIf="isConnected" routerLink="/Scan Waste">Scan Waste</a>-->
+<!--  <a class="navbar-brand" *ngIf="isConnected" routerLink="/profile">Your Profile</a>-->
+<!--  <a class="navbar-brand" *ngIf="isConnected" routerLink="/userStat">Your Stat</a>-->
+<!--  <a class="navbar-brand" style="margin-left:auto" *ngIf="!isConnected" routerLink="/login">Log In</a>-->
+<!--  <a class="navbar-brand" *ngIf="!isConnected" routerLink="/register">Sign In</a>-->
+<!--  <a class="navbar-brand" style="margin-left:auto; text-align: center;color:white"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>-->
+<!--  <a class="navbar-brand" style="margin-left:auto; color:white" *ngIf="isConnected" (click)="LogOut()">LogOut</a>-->
+<!--  <ul class="navbar-nav"></ul>-->
+<!--</nav>-->
+
+<div class="container">
+  <div class="row justify-content-center" style="display: flex">
+    <h1 class="display-2">Vous avez jusqu'à maintenant Scanner {{total_prediction}} objets</h1>
+    <h1 class="display-2">En moyenne nous sommes sûr de nos prédictions à   {{prediction_avg_score}} %</h1>
+  </div>
+</div>
+
+<div style="margin-top:2rem;">
+  <div style="display: flex; width:90%; margin:auto">
+    <div class="jumbotron">
+      <p style="text-align:center"><b>Number of scanned garbage per Type</b></p>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="jumbotron">
+      <p style="text-align:center"><b>Number of scanned garbage per Day</b></p>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+    <div class="jumbotron">
+      <p style="text-align:center"><b>% of scanned garbage per Type</b></p>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+</div>

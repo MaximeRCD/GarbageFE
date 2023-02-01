@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {RegisterService, User} from "../../register-service.service";
+import {RegisterService, User} from "../../../services/register-service.service";
 import {Router} from "@angular/router";
-import {LoginServiceService} from "../../login-service.service";
+import {LoginServiceService} from "../../../services/login-service.service";
 import {LogInComponent} from "../log-in/log-in.component";
 import {Md5} from "ts-md5";
+import { ApiGarbageService } from 'src/app/services/api-garbage.service';
 
 @Component({
 selector: 'app-register',
@@ -23,8 +24,9 @@ export class RegisterComponent {
               private fb:FormBuilder,
               private router: Router,
               private ls: LoginServiceService,
+              private apiService: ApiGarbageService,
   ) {
-    this.loginComp = new LogInComponent(this.ls, this.fb, this.router)
+    this.loginComp = new LogInComponent(this.ls, this.fb, this.router,this.apiService)
   }
 
   ngOnInit(): void

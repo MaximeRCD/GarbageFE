@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {LoginServiceService, UserLogged} from "../../login-service.service";
+import {LoginServiceService, UserLogged} from "../../../services/login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Md5} from "ts-md5";
+import { ApiGarbageService } from 'src/app/services/api-garbage.service';
 
 
 @Component({
@@ -23,8 +24,9 @@ export class LogInComponent {
    constructor(private loginService:LoginServiceService,
                private fb:FormBuilder,
                private router:Router,
+               private apiService: ApiGarbageService,
 )
- { }
+ {}
 
   ngOnInit(): void
   {
@@ -35,7 +37,8 @@ export class LogInComponent {
       )]]
     })
   }
-  
+
+
   OnSubmit() {
     this.submitted = true;
     if(this.loginForm.valid){
@@ -56,17 +59,19 @@ export class LogInComponent {
         passWord:'',
       });
     }
-    function redirect(userLogged: UserLogged, router: Router, loginForm: FormGroup) : boolean {
-      // console.log(userLogged.pseudo)
-      // console.log(loginForm.get('userName')?.value)
-      // console.log(userLogged.password)
-      // console.log(loginForm.get('passWord')?.value)
 
-      if ((userLogged.pseudo == identifiant) && (userLogged.password == pwd)){
-        console.log("User Signed in")
-        router.navigate(["/"]);
+    function redirect(ls: LoginServiceService, router: Router,  loginForm: FormGroup) : boolean {
+
+      if ((ls.user.pseudo == identifiant) && (ls.user.password == pwd)){
+        ls.isConnected = true;
+        ls.setUserLogged(ls.user);
+        console.log("ussr : ", ls.getUserLogged());
+        router.navigate(['']) .then(() => {
+          window.location.reload();
+        });
         clear(loginForm);
         loginForm.disable();
+        console.log("User Signed in")
         return true;
       }
       console.log("User not Signed in")
@@ -74,14 +79,11 @@ export class LogInComponent {
       return false;
        }
 
-     this.loginService.getLoginResponse(identifiant).subscribe(result =>{
-      this.loginService.user = result;
-      this.loginService.isConnected = true;
-      this.loginService.setUserLogged(this.loginService.user);
-      console.log("ussr : ", this.loginService.getUserLogged())
-       this.isValidUser = redirect(this.loginService.getUserLogged(),this.router,  this.loginForm)
+     this.apiService.getLoginResponse(identifiant).subscribe(result =>{
+       this.loginService.user = result;
+      this.isValidUser = redirect(this.loginService,this.router,  this.loginForm)
       },err=>{
       console.log("Something went wrong")
-    })
+    }),{headers: this.apiService.headers}
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {LoginServiceService, UserLogged} from "../login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,6 @@ import {LoginServiceService, UserLogged} from "../login-service.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  isConnected = false;
-  user!: UserLogged;
 
   constructor(private ls: LoginServiceService){ }
 
@@ -21,16 +18,4 @@ export class HomeComponent {
   // Dashboard properties
   public VizIndex = 'Tableau-Viz-' + this.dashboardIndex;
 
-  ngOnInit(){
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-    console.log(this.user);
-    console.log(this.isConnected);
-  }
-
-  LogOut() {
-    this.ls.LogOut();
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-  }
 }

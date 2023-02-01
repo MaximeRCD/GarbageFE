@@ -4,18 +4,19 @@ import { WebcamModule } from 'ngx-webcam';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScanPhotoComponent } from './scan-photo/scan-photo.component';
+import { ScanPhotoComponent } from './components/scan-photo/scan-photo.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { UserStatisticComponent } from './user-statistic/user-statistic.component';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './connection/register/register.component';
+import { UserStatisticComponent } from './components/user-statistic/user-statistic.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/connection/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-import {LogInComponent} from "./connection/log-in/log-in.component";
+import {LogInComponent} from "./components/connection/log-in/log-in.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BaselineComponent } from './components/baseline/baseline.component';
 
 
 
@@ -28,6 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomeComponent,
     LogInComponent,
     RegisterComponent,
+    BaselineComponent,
   ],
   imports: [
     FlexLayoutModule,

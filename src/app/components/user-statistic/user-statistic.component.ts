@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { UserStatistiqueService, Stat, UserTest } from "../user-statistique.service";
+import { UserStatistiqueService, Stat, UserTest } from "../../services/user-statistique.service";
 import { Chart } from "chart.js/auto";
-import {LoginServiceService, UserLogged} from "../login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {Router} from "@angular/router";
+import { ApiGarbageService } from '../../services/api-garbage.service';
 
 @Component({
   selector: 'app-user-statistic',
@@ -10,12 +11,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-statistic.component.css']
 })
 export class UserStatisticComponent {
-  //user!: UserTest;
   statsList: Stat[] = [];
   lineChart!: Chart;
   barChart!: Chart;
   pieChart!: Chart;
-  isConnected!: boolean;
   user!: UserLogged;
 
   total_prediction! : number;
@@ -23,9 +22,11 @@ export class UserStatisticComponent {
 
 
 
+
   constructor(private userStatService : UserStatistiqueService,
               private ls: LoginServiceService,
-              private router: Router) {
+              private router: Router,
+              private apiService: ApiGarbageService) {
   }
 
   userStatSubscriber = {
@@ -90,7 +91,7 @@ export class UserStatisticComponent {
           labels: ["G&M", "Other", "Organic", "Plastic", "Paper"],
           datasets: [{
             label: 'Percentage of scanned garbage per Type',
-            data: [
+            data:[
               _statsList.filter(x=>x.predicted_class === "G&M").length,
               _statsList.filter(x=>x.predicted_class === "Other").length,
               _statsList.filter(x=>x.predicted_class === "Organic").length,
@@ -110,27 +111,14 @@ export class UserStatisticComponent {
       });
       this.total_prediction = _statsList.length;
       this.prediction_avg_score = _statsList.map(x=> x.score).reduce((x,y)=> x+y) / this.total_prediction * 100
-
-
     },
     error: (err: any) => console.error(err),
     complete: () => console.log("Everything is ok")
   }
 
-
   ngOnInit(): void {
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-    this.userStatService.getUserStats(this.user.id).subscribe(this.userStatSubscriber);
-    this.total_prediction = this.statsList.length;
+    this.user = this.ls.getUserLogged();
+    this.apiService.getUserStats(this.user.id).subscribe(this.userStatSubscriber),{headers: this.apiService.headers};
+
   }
-
-  LogOut() {
-    this.ls.LogOut();
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-  }
-
-
-
 }

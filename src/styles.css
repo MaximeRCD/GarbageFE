@@ -247,7 +247,8 @@ blockquote {
 }
 
 .btn-primary {
-  background: #ce8460;
+  background: #ce8460!important;
+  border-color: #ce8460!important;
 }
 
 .btn-primary:hover {

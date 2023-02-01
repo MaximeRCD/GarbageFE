@@ -17,14 +17,14 @@
                       <p class="text-danger" *ngIf="!is_valid_form">Password must be an 8 to 12 string containing UpperCase and LowerCase letters, digits and special characters</p>
                     </div>
                     <div class="col-6 mb-3" style="margin-left:25%">
-                      <input class="form-control" type="text" formControlName="email" placeholder="E-mail">
+                      <input class="form-control " type="text" formControlName="email" placeholder="E-mail">
                       <p class="text-danger" *ngIf="!is_valid_form">This might not be a valid mail address</p>
                     </div>
                   </div>
                   <div>
-                    <button type="submit" *ngIf="!submitted" class="btn btn-primary" style="margin-left:40%">Register</button>
+                    <button type="submit" *ngIf="!submitted" class="btn btn-primary">Register</button>
                     <p *ngIf="submitted" style="text-align:center;"> The user {{user.pseudo}} has been created</p>
-                    <button class="btn btn-primary" *ngIf="submitted" (click)="Login()" style="margin-left:40%">Login</button>
+                    <button class="btn btn-primary" *ngIf="submitted" (click)="Login()">Login</button>
                   </div>
                 </div>
           </form>

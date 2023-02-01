@@ -6,6 +6,7 @@
           <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul id="menu" class="menu navbar-nav mx-auto">
               <li class="nav-item">
+                <img src="../../../assets/recycle-logo-11551063921u6mrnpkdca-removebg-preview.png" style="width:40px; height:auto;">
                 <a class="nav-link" routerLink="/home">Waste sort</a>
               </li>
               <li class="nav-item">
@@ -24,7 +25,7 @@
                 <a class="nav-link" *ngIf="!isConnected" routerLink="/register">Sign In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="text-align: center;"  *ngIf="isConnected"> Welcome {{user.pseudo}} </a>
+                <a class="nav-link disabled" style="text-align: center;" *ngIf="isConnected"> Welcome {{user.pseudo}} </a>
               </li>
               <li class="nav-item " >
                 <a class="nav-link" *ngIf="isConnected" (click)="LogOut()">LogOut</a>

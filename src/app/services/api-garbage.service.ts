@@ -63,7 +63,7 @@ putResultPredictedOnBdd(data : resutTosave){
     ),  {headers: this.headers}
 }
 deleteUser(pseudo: string, pwd: string){
-  return this.http.delete(`${this.apiUrl}users/${pseudo}?pseudo=${pseudo}&pwd=${pwd}`)
+  return this.http.delete(`${this.apiUrl}/users/${pseudo}?pwd=${pwd}`)
 }
 
 }

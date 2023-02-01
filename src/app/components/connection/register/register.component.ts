@@ -19,6 +19,7 @@ export class RegisterComponent {
   registerForm!: FormGroup;
   loginComp!: LogInComponent;
   is_valid_form = true;
+  showPassword = false;
 
   constructor(private rs: RegisterService,
               private fb:FormBuilder,

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {LoginServiceService, UserLogged} from "../../login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Md5} from "ts-md5";
+import { ApiGarbageService } from 'src/app/services/api-garbage.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LogInComponent {
    constructor(private loginService:LoginServiceService,
                private fb:FormBuilder,
                private router:Router,
-               // private route: ActivatedRoute
+               private apiService: ApiGarbageService,
 )
  {}
 
@@ -78,11 +79,11 @@ export class LogInComponent {
       return false;
        }
 
-     this.loginService.getLoginResponse(identifiant).subscribe(result =>{
+     this.apiService.getLoginResponse(identifiant).subscribe(result =>{
        this.loginService.user = result;
       this.isValidUser = redirect(this.loginService,this.router,  this.loginForm)
       },err=>{
       console.log("Something went wrong")
-    })
+    }),{headers: this.apiService.headers}
   }
 }

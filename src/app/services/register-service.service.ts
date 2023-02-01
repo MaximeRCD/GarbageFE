@@ -2,21 +2,19 @@ import  { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserLogged} from "./login-service.service";
+import { ApiGarbageService } from './api-garbage.service';
 
 @Injectable({
 providedIn: 'root'
 })
 export class RegisterService {
-  apiUrl="http://localhost:8000/users/";
   user!: UserLogged;
-  headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
-
-  constructor(private http: HttpClient) {}
+  
+  constructor(private http: HttpClient,
+    private apiService:ApiGarbageService) {}
 
   register(user: User){
-    return this.http.post<UserLogged>(this.apiUrl, user, {headers: this.headers}).subscribe({
+    this.apiService.postRegister(user).subscribe({
         next: data => {
             this.user = data;
         },

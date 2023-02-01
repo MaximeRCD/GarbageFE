@@ -2,8 +2,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {WebcamImage} from 'ngx-webcam';
 import {Observable, Subject} from 'rxjs';
-import {LoginServiceService, UserLogged} from "../login-service.service";
+import {LoginServiceService, UserLogged} from "../services/login-service.service";
 import {Router} from "@angular/router";
+import { ApiGarbageService } from '../services/api-garbage.service';
 
 @Component({
   selector: 'app-scan-photo',
@@ -13,18 +14,13 @@ import {Router} from "@angular/router";
 export class ScanPhotoComponent {
 
   user!: UserLogged;
-  headers= new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-    .set('Access-Control-Allow-Origin', '*');
-
-  popup:boolean = false;
-  availableResult:boolean = false;
-  private trigger = new Subject();
-  public webcamImage!: WebcamImage;
-  private nextWebcam = new Subject();
-  captureImage  = '';
-  result : model_result = {
+    popup:boolean = false;
+    availableResult:boolean = false;
+    private trigger = new Subject();
+    public webcamImage!: WebcamImage;
+    private nextWebcam = new Subject();
+    captureImage  = '';
+    result : model_result = {
       image:"string",
       class: "string",
       score: 0
@@ -37,7 +33,8 @@ export class ScanPhotoComponent {
 
   constructor (private http: HttpClient,
                private ls: LoginServiceService,
-               private router: Router){}
+               private router: Router,
+               private apiSerivce:ApiGarbageService){}
 
     ngOnInit() {
       this.user = this.ls.getUserLogged();
@@ -99,20 +96,20 @@ export class ScanPhotoComponent {
      formdata.append('img',this.captureImage)
      formdata.append('name',photo_name);
       // put request api here
-      this.http.post('http://localhost:8000/scans/images', formdata).subscribe(
+      this.apiSerivce.postSaveImg(formdata).subscribe(
         (response) => {
           console.log(response);
           this.getPredictedClass(photo_name);
         },
         (error) => console.log(error)
-        ),  {headers: this.headers}
+        ),  {headers: this.apiSerivce.headers}
     }
 
     public getPredictedClass(photo_name:string)
     {
 
-      this.http.get<model_result>(`http://localhost:8000/model/?imageUrl=./img/${photo_name}`).subscribe( (data: model_result) => {
-
+      this.apiSerivce.getModelResult(photo_name).subscribe( (data: model_result) => {
+      
       this.result.image = data.image;
       this.result.score = data.score;
       this.result.class = data.class;
@@ -121,20 +118,21 @@ export class ScanPhotoComponent {
       this.ResultPredicted.user_id=this.user.id;
       this.ResultPredicted.predicted_class =data.class ;
       this.ResultPredicted.score = data.score;
-      this.putResultPredicted(this.ResultPredicted);
+      this.apiSerivce.putResultPredictedOnBdd(this.ResultPredicted);
     }
       ),
-       {headers: this.headers}
+       {headers: this.apiSerivce.headers}
     }
 
-    public putResultPredicted(data : resutTosave){
-      this.http.put<resutTosave>('http://localhost:8000/stats', data).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => console.log(error)
-        ),  {headers: this.headers}
-    }
+    // public putResultPredicted(data : resutTosave){
+    //   this.http.put<resutTosave>('http://localhost:8000/stats', data).subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //     },
+    //     (error) => console.log(error)
+    //     ),  {headers: this.headers}
+    // }
+
 }
 export interface model_result{
   image:string,

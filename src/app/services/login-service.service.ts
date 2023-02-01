@@ -7,22 +7,23 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class LoginServiceService {
-   apiUrl="http://localhost:8000/users";
+  //  apiUrl="http://localhost:8000/users";
    user!: UserLogged;
    isConnected = false;
 
-  headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+  // headers = new HttpHeaders()
+  //   .set('Content-Type', 'application/json')
+  //   .set('Access-Control-Allow-Origin', '*');
 
   constructor(private http: HttpClient,
               private router: Router)
  { }
 
-  getLoginResponse(identifiant: string): Observable<UserLogged> {
-    return this.http.get<UserLogged>(`${this.apiUrl}/${identifiant}`,
-      {headers: this.headers});
-  }
+
+  // getLoginResponse(identifiant: string): Observable<UserLogged> {
+  //   return this.http.get<UserLogged>(`${this.apiUrl}/${identifiant}`,
+  //     {headers: this.headers});
+  // }
 
   public setUserLogged(value: UserLogged){
     localStorage.setItem('user', JSON.stringify(value));

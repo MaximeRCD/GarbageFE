@@ -14,6 +14,7 @@ import { model_result, resutTosave } from '../components/scan-photo/scan-photo.c
 export class ApiGarbageService {
 
   apiUrl="http://localhost:8000";
+  //apiUrl="http://api:8000";
   headers= new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")

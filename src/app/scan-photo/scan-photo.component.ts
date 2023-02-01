@@ -14,8 +14,6 @@ import { ApiGarbageService } from '../services/api-garbage.service';
 export class ScanPhotoComponent {
 
   user!: UserLogged;
-  isConnected!: boolean;
-
     popup:boolean = false;
     availableResult:boolean = false;
     private trigger = new Subject();
@@ -27,13 +25,11 @@ export class ScanPhotoComponent {
       class: "string",
       score: 0
     };
-    ResultPredicted: resutTosave = {
+  ResultPredicted: resutTosave = {
       user_id : 1,
       predicted_class : "string",
       score : 0
     };
-
-
 
   constructor (private http: HttpClient,
                private ls: LoginServiceService,
@@ -41,8 +37,8 @@ export class ScanPhotoComponent {
                private apiSerivce:ApiGarbageService){}
 
     ngOnInit() {
-      this.user = this.ls.user;
-      this.isConnected = this.ls.isConnected;
+      this.user = this.ls.getUserLogged();
+      console.log(this.user)
     }
 
     /*------------------------------------------
@@ -65,9 +61,7 @@ export class ScanPhotoComponent {
 
         this.webcamImage = webcamImage;
         this.captureImage = webcamImage!.imageAsDataUrl;
-        //console.info('received webcam image', this.captureImage);
         this.saveImg(photo_name);
-        //this.getPredictedClass(photo_name)
     }
 
     /*------------------------------------------
@@ -101,16 +95,10 @@ export class ScanPhotoComponent {
      var formdata: any = new FormData();
      formdata.append('img',this.captureImage)
      formdata.append('name',photo_name);
-
-   /*  for (var pair of formdata.entries())
-        {
-        console.log(pair[0]+ ', '+ pair[1]);
-        }
-*/
       // put request api here
       this.apiSerivce.postSaveImg(formdata).subscribe(
         (response) => {
-          //console.log(response);
+          console.log(response);
           this.getPredictedClass(photo_name);
         },
         (error) => console.log(error)
@@ -121,7 +109,6 @@ export class ScanPhotoComponent {
     {
 
       this.apiSerivce.getModelResult(photo_name).subscribe( (data: model_result) => {
-      //console.log(data.class);
       
       this.result.image = data.image;
       this.result.score = data.score;
@@ -146,12 +133,6 @@ export class ScanPhotoComponent {
     //     ),  {headers: this.headers}
     // }
 
-
-  LogOut() {
-    this.ls.LogOut();
-    this.user = this.ls.user;
-    this.isConnected = this.ls.isConnected;
-  }
 }
 export interface model_result{
   image:string,

@@ -15,8 +15,6 @@ export class LoginServiceService {
   //   .set('Content-Type', 'application/json')
   //   .set('Access-Control-Allow-Origin', '*');
 
-
-
   constructor(private http: HttpClient,
               private router: Router)
  { }
@@ -39,10 +37,12 @@ export class LoginServiceService {
     return JSON.parse(localStorage.getItem("user")?? '');
   }
 
-
   LogOut() {
     this.isConnected = false;
-    this.router.navigate(["/"])
+    this.resetUserLogged();
+    this.router.navigate([""]).then(() => {
+      window.location.reload();
+    });
   }
 }
 

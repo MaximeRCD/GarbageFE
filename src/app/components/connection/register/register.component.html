@@ -9,7 +9,7 @@
           <input formControlName="userName" matInput placeholder="Username">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input  formControlName="passWord" matInput placeholder="Password">
+          <input  type="password" formControlName="passWord" matInput placeholder="Password">
         </mat-form-field>
         <p class="text-danger" *ngIf="!is_valid_form">Password must be an 8 to 12 string containing UpperCase and LowerCase letters, digits and special characters</p>
         <mat-form-field class="example-full-width">

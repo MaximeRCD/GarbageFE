@@ -2,9 +2,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {WebcamImage} from 'ngx-webcam';
 import {Observable, Subject} from 'rxjs';
-import {LoginServiceService, UserLogged} from "../services/login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {Router} from "@angular/router";
-import { ApiGarbageService } from '../services/api-garbage.service';
+import { ApiGarbageService } from '../../services/api-garbage.service';
 
 @Component({
   selector: 'app-scan-photo',
@@ -109,7 +109,7 @@ export class ScanPhotoComponent {
     {
 
       this.apiSerivce.getModelResult(photo_name).subscribe( (data: model_result) => {
-      
+
       this.result.image = data.image;
       this.result.score = data.score;
       this.result.class = data.class;

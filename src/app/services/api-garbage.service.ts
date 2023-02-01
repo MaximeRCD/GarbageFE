@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 import { User } from './register-service.service';
 import { Stat } from './user-statistique.service';
 import { Md5 } from 'ts-md5';
-import { model_result, resutTosave } from '../scan-photo/scan-photo.component';
+import { model_result, resutTosave } from '../components/scan-photo/scan-photo.component';
 
 @Injectable({
   providedIn: 'root'

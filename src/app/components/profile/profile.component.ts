@@ -1,10 +1,10 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {LoginServiceService, UserLogged} from "../services/login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {Md5} from "ts-md5";
 import {Router} from "@angular/router";
-import { ApiGarbageService } from '../services/api-garbage.service';
+import { ApiGarbageService } from '../../services/api-garbage.service';
 
 @Component({
   selector: 'app-profile',

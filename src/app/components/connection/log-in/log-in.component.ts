@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {LoginServiceService, UserLogged} from "../../services/login-service.service";
+import {LoginServiceService, UserLogged} from "../../../services/login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Md5} from "ts-md5";

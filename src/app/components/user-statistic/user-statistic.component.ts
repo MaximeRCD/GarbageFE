@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { UserStatistiqueService, Stat, UserTest } from "../services/user-statistique.service";
+import { UserStatistiqueService, Stat, UserTest } from "../../services/user-statistique.service";
 import { Chart } from "chart.js/auto";
-import {LoginServiceService, UserLogged} from "../services/login-service.service";
+import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {Router} from "@angular/router";
-import { ApiGarbageService } from '../services/api-garbage.service';
+import { ApiGarbageService } from '../../services/api-garbage.service';
 
 @Component({
   selector: 'app-user-statistic',

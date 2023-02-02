@@ -57,9 +57,9 @@ putResetPwd(pseudo: string, oldPwd: string, newPwd: string){
 putResultPredictedOnBdd(data : resutTosave){
   return  this.http.put<resutTosave>(`${this.apiUrl}/stats`, data).subscribe(
     (response) => {
-      console.log(response);
+
     },
-    (error) => console.log(error)
+
     ),  {headers: this.headers}
 }
 deleteUser(pseudo: string, pwd: string){

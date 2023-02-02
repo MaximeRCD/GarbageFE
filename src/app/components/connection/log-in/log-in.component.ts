@@ -65,16 +65,16 @@ export class LogInComponent {
       if ((ls.user.pseudo == identifiant) && (ls.user.password == pwd)){
         ls.isConnected = true;
         ls.setUserLogged(ls.user);
-        console.log("ussr : ", ls.getUserLogged());
+
         router.navigate(['']) .then(() => {
           window.location.reload();
         });
         clear(loginForm);
         loginForm.disable();
-        console.log("User Signed in")
+
         return true;
       }
-      console.log("User not Signed in")
+
       clear(loginForm);
       return false;
        }
@@ -83,7 +83,6 @@ export class LogInComponent {
        this.loginService.user = result;
       this.isValidUser = redirect(this.loginService,this.router,  this.loginForm)
       },err=>{
-      console.log("Something went wrong")
     }),{headers: this.apiService.headers}
   }
 }

@@ -7,19 +7,12 @@ import {Observable} from "rxjs";
 })
 export class UserStatistiqueService {
 
-  // apiUrl="http://localhost:8000/scans";
-  // headers = new HttpHeaders()
-  //   .set('Content-Type', 'application/json')
-  //   .set('Access-Control-Allow-Origin', '*');
+
 
   constructor(
     private http: HttpClient
   ) { }
 
-  // getUserStats(user_id: number): Observable<Stat[]>{
-  //   return this.http.get<Stat[]>(`${this.apiUrl}?user_id=${user_id}`,
-  //     {headers: this.headers});
-  // }
 
 }
 

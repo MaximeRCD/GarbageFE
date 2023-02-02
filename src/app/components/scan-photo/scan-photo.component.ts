@@ -38,7 +38,7 @@ export class ScanPhotoComponent {
 
     ngOnInit() {
       this.user = this.ls.getUserLogged();
-      console.log(this.user)
+
     }
 
     /*------------------------------------------
@@ -98,10 +98,10 @@ export class ScanPhotoComponent {
       // put request api here
       this.apiSerivce.postSaveImg(formdata).subscribe(
         (response) => {
-          console.log(response);
+
           this.getPredictedClass(photo_name);
         },
-        (error) => console.log(error)
+
         ),  {headers: this.apiSerivce.headers}
     }
 
@@ -124,14 +124,6 @@ export class ScanPhotoComponent {
        {headers: this.apiSerivce.headers}
     }
 
-    // public putResultPredicted(data : resutTosave){
-    //   this.http.put<resutTosave>('http://localhost:8000/stats', data).subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //     },
-    //     (error) => console.log(error)
-    //     ),  {headers: this.headers}
-    // }
 
 }
 export interface model_result{

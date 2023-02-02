@@ -1,5 +1,6 @@
 .jumbotron{
     border: 2px solid gray;
+    padding:1rem;
     border-radius: 1rem;
     background-color: #f8efea;
     width: 30%;

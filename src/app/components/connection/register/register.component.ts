@@ -53,17 +53,15 @@ export class RegisterComponent {
       this.user.pseudo = this.registerForm.get('userName')?.value;
       this.user.password = Md5.hashStr(this.registerForm.get('passWord')?.value);
       this.rs.register(this.user);
-      //this.router.navigate(['/login'])
+
+      setTimeout(() => {
+        this.loginComp.login(this.user.pseudo, this.user.password);
+      },2000)
     }
     else{
       this.is_valid_form = false
     }
   }
-
-  Login(){
-    this.loginComp.login(this.user.pseudo, this.user.password);
-  }
-
 }
 
 

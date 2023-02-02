@@ -4,7 +4,6 @@ import { Chart } from "chart.js/auto";
 import {LoginServiceService, UserLogged} from "../../services/login-service.service";
 import {Router} from "@angular/router";
 import { ApiGarbageService } from '../../services/api-garbage.service';
-import * as pluginsDataLabels from "chartjs-plugin-datalabels";
 
 @Component({
   selector: 'app-user-statistic',

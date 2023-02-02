@@ -1,22 +1,21 @@
 <div class="container">
 
-    <!-- <h2 class="mt-4 mb-3" style="text-align:center" >Scanner votre objet</h2> -->
-
     <div *ngIf="!popup">
-        <div style="margin-left: 25%;">
+        <div class="WebcamDiv">
             <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" style="width:100%"></webcam>
         </div>
-        <button class="btn btn-primary" (click)="triggerSnapshot(); popup = true;" style="width:30%; margin-left: 35%;">Take A Snapshot</button>
+        <button class="btn btn-primary" (click)="triggerSnapshot(); popup = true;" style="
+        width:30%;margin-left: 35%;">Take A Snapshot</button>
     </div>
 
     <div class="overlay_ScanPhoto" *ngIf="popup">
         <div class="popup">
-            <div id="results"style="text-align:center">The captured image</div>
+            <div id="results" style="text-align:center">The captured image</div>
             <a class="close" (click)="popup = false; availableResult = false;">&times;</a>
-            <br/>
+            <br />
             <img src="{{ captureImage }}" height="300px" class="img-thumbnail">
-            <div *ngIf="availableResult" style="text-align:center"><b>{{this.result.class}}</b></div>
-            <img src="assets\loading-gif.gif"*ngIf="!availableResult" class="center">
+            <div class="resultDiv" *ngIf="availableResult"><b>{{this.result.class}}</b></div>
+            <img src="assets\loading-gif.gif" *ngIf="!availableResult" class="center">
         </div>
     </div>
 </div>

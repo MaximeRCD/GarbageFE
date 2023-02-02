@@ -1,11 +1,18 @@
 .jumbotron{
-    border: 1px solid black;
-    background-color: aliceblue;
+    border: 2px solid gray;
+    padding:1rem;
+    border-radius: 1rem;
+    background-color: #f8efea;
     width: 30%;
     height: auto;
     margin: auto;
   }
 
-  canvas{
-    margin-top:10%;
-  }
+.container .jumbotron{
+  width:50%;
+  margin-top: 2rem;
+}
+
+canvas{
+  margin-top:10%;
+}

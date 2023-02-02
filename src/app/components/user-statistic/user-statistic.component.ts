@@ -21,8 +21,6 @@ export class UserStatisticComponent {
   prediction_avg_score! : number;
 
 
-
-
   constructor(private userStatService : UserStatistiqueService,
               private ls: LoginServiceService,
               private router: Router,
@@ -50,11 +48,11 @@ export class UserStatisticComponent {
           labels: SetToList(new Set(_statsList.map(x=>x.date.slice(0,10)))),
           datasets: [
             {
-              label: 'Number of like per Day',
+              label: "Counts",
               data: SetToList(new Set(_statsList.map(x=>x.date.slice(0,10)))).map(x => _statsList.filter(y => y.date.slice(0,10) === x ).length),
-              pointBackgroundColor : ["#B3F02F"],
-              borderColor: "#B3F02F",
-              backgroundColor : "#B3F02F",
+              pointBackgroundColor : ["gray"],
+              borderColor: "gray",
+              backgroundColor : "gray",
             }
           ]
         }
@@ -65,7 +63,7 @@ export class UserStatisticComponent {
         data: {
           labels: ["G&M", "Other", "Organic", "Plastic", "Paper"],
           datasets: [{
-            label: 'Number of scanned garbage per Type',
+            label: "Count Per Type",
             barPercentage: 0.5,
             // barThickness: 6,
             // maxBarThickness: 8,
@@ -77,11 +75,11 @@ export class UserStatisticComponent {
               _statsList.filter(x=>x.predicted_class === "Plastic").length,
               _statsList.filter(x=>x.predicted_class === "Paper").length,
             ],
-            backgroundColor: [ '#90ee90', '#add8e6', 'red', 'green', 'blue', ],
+            backgroundColor: [ '#B3FFA4', '#add8e6', '#FFA4A4', '#FFF4A4', '#EAA4FF', ],
           }]
         },
         options:{
-          responsive:true
+          responsive:true,
         }
       });
 
@@ -98,16 +96,17 @@ export class UserStatisticComponent {
               _statsList.filter(x=>x.predicted_class === "Plastic").length,
               _statsList.filter(x=>x.predicted_class === "Paper").length,
             ],
-            backgroundColor: [ '#90ee90', '#add8e6', 'red', 'green', 'blue', ],
+            backgroundColor: [ '#B3FFA4', '#add8e6', '#FFA4A4', '#FFF4A4', '#EAA4FF', ],
           }]
         },
         options:{
           responsive:true,
           plugins: {
             legend: {
-              display: true,}
+              display: true,
+            }
           }
-        }
+        },
       });
       this.total_prediction = _statsList.length;
       this.prediction_avg_score = _statsList.map(x=> x.score).reduce((x,y)=> x+y) / this.total_prediction * 100

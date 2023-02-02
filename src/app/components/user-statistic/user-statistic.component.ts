@@ -50,9 +50,9 @@ export class UserStatisticComponent {
             {
               label: "Counts",
               data: SetToList(new Set(_statsList.map(x=>x.date.slice(0,10)))).map(x => _statsList.filter(y => y.date.slice(0,10) === x ).length),
-              pointBackgroundColor : ["#000000"],
-              borderColor: "#000000",
-              backgroundColor : "#000000",
+              pointBackgroundColor : ["gray"],
+              borderColor: "gray",
+              backgroundColor : "gray",
             }
           ]
         }

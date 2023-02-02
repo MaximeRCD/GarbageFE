@@ -11,7 +11,7 @@
 
     <div class="overlay_ScanPhoto" *ngIf="popup">
         <div class="popup">
-            <div id="results"style="text-align:center">Votre image capturée</div>
+            <div id="results"style="text-align:center">The captured image</div>
             <a class="close" (click)="popup = false; availableResult = false;">&times;</a>
             <br/>
             <img src="{{ captureImage }}" height="300px" class="img-thumbnail">

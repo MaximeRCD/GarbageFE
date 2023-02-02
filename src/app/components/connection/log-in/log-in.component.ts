@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {LoginServiceService, UserLogged} from "../../../services/login-service.service";
+import {LoginServiceService} from "../../../services/login-service.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Md5} from "ts-md5";
 import { ApiGarbageService } from 'src/app/services/api-garbage.service';
 
@@ -65,16 +64,13 @@ export class LogInComponent {
       if ((ls.user.pseudo == identifiant) && (ls.user.password == pwd)){
         ls.isConnected = true;
         ls.setUserLogged(ls.user);
-
         router.navigate(['']) .then(() => {
           window.location.reload();
         });
         clear(loginForm);
         loginForm.disable();
-
         return true;
       }
-
       clear(loginForm);
       return false;
        }
@@ -83,6 +79,7 @@ export class LogInComponent {
        this.loginService.user = result;
       this.isValidUser = redirect(this.loginService,this.router,  this.loginForm)
       },err=>{
+      console.log("Something went wrong");
     }),{headers: this.apiService.headers}
   }
 }

@@ -1,4 +1,8 @@
-
+.tableau-viz-container{
+    width: 850px;
+    height: auto;
+    margin:auto;
+}
 
 .jumbotron{
     background-color: aliceblue;
@@ -7,4 +11,8 @@
     margin:auto;
     margin-top:1rem;
     text-align: center;
+}
+
+tableau-viz{
+    margin-left: 5%;
 }

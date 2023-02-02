@@ -16,3 +16,15 @@
 canvas{
   margin-top:10%;
 }
+
+.lg-title{
+  text-align: center;
+}
+
+.FirstDiv{
+  margin-top:2rem;
+}
+
+.SecondDiv{
+  display: flex; width:90%; margin:auto;
+}

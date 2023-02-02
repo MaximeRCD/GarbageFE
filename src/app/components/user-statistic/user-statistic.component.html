@@ -1,24 +1,24 @@
 <div class="container">
   <div class="jumbotron">
-    <h2 class="lg-title" style="text-align: center">You have scanned a total of {{total_prediction}} objects</h2>
-    <h2 class="lg-title" style="text-align: center">On your scans, The predictions are {{prediction_avg_score}}% reliable</h2>
+    <h2 class="lg-title">You have scanned a total of {{total_prediction}} objects</h2>
+    <h2 class="lg-title">On your scans, The predictions are {{prediction_avg_score}}% reliable</h2>
   </div>
 </div>
 
-<div style="margin-top:2rem;">
-  <div style="display: flex; width:90%; margin:auto">
+<div class="FirstDiv">
+  <div class="SecondDiv">
     <div class="jumbotron">
-      <p style="text-align:center"><b>Number of scanned garbage per Type</b></p>
+      <p class="lg-title"><b>Number of scanned garbage per Type</b></p>
       <canvas id="barChart"></canvas>
     </div>
 
     <div class="jumbotron">
-      <p style="text-align:center"><b>Number of scanned garbage per Day</b></p>
+      <p class="lg-title"><b>Number of scanned garbage per Day</b></p>
       <canvas id="lineChart"></canvas>
     </div>
 
     <div class="jumbotron">
-      <p style="text-align:center"><b>% of scanned garbage per Type</b></p>
+      <p class="lg-title"><b>% of scanned garbage per Type</b></p>
       <canvas id="pieChart"></canvas>
     </div>
   </div>

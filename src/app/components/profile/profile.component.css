@@ -1,10 +1,39 @@
 .gradient-custom {
-    /* fallback for old browsers */
     background: #f8efea;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+}
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    /* background: -webkit-linear-gradient(to left top, #ce8460, white); */
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /* background: linear-gradient(to left top, #ce8460, white)  */
-    }
+.card {
+    background-color: #f8efea;
+}
+
+.card .mb-3 {
+    border-radius: .5rem;
+}
+
+.lg-title {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.username {
+    margin-left: 25%;
+}
+
+.password {
+    margin: auto;
+    display: flex;
+}
+
+img {
+    width:100px;
+}
+
+input {
+    background-color: #faf7f5;
+}
+
+section {
+    background-color: #f4f5f7;
+}

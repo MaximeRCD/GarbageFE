@@ -1,0 +1,27 @@
+version : '3'
+services:
+        db:
+           image : mysql
+           volumes:
+                   - ../mysql:/var/lib/mysql
+           ports:
+                   - "3306:3306"
+           environment:
+                   - MYSQL_ROOT_PASSWORD=root
+        api:
+            image: maxlebic1/garbage_api:apiv1
+
+            ports:
+                    - "8000:8000"
+            restart: always
+
+        front: 
+            image: djabarane/garbage:latest
+            ports:
+                    - "80:80"
+            restart: always
+
+
+
+        
+

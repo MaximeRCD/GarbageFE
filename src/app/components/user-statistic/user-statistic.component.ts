@@ -112,7 +112,7 @@ export class UserStatisticComponent {
       this.prediction_avg_score = _statsList.map(x=> x.score).reduce((x,y)=> x+y) / this.total_prediction * 100
     },
     error: (err: any) => console.error(err),
-    complete: () => console.log("Everything is ok")
+
   }
 
   ngOnInit(): void {

@@ -35,7 +35,6 @@ export class ProfileComponent {
 
   ngOnInit(){
     this.user = this.ls.getUserLogged();
-    console.log(this.user);
     this.profileForm = new FormGroup({
       name: new FormControl(this.user.pseudo),
       pseudo: new FormControl(this.user.pseudo),
@@ -49,12 +48,12 @@ export class ProfileComponent {
   onSubmit() {
     this.apiService.putResetPwd(this.user.pseudo,this.user.password,this.profileForm.value.newPassword).subscribe(
         (response) => {
-          console.log(response);
+
           this.user.password = Md5.hashStr(this.profileForm.value.newPassword);
         },
-        (error) => console.log(error)
+
         ),  {headers: this.apiService.headers}
-    console.log(`after submit ${this.user.password}`)
+
     }
 
   Ondelete() {
@@ -64,7 +63,7 @@ export class ProfileComponent {
         (response) => {
           this.LogOut();
         },
-        (error) => console.log(error)
+
         ),  {headers: this.apiService.headers}
       }
     }
